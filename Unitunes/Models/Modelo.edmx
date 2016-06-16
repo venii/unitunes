@@ -95,10 +95,11 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Publicado" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Publicado" Type="bit" Nullable="false" />
     <Property Name="Preco" Type="decimal" Nullable="false" />
     <Property Name="Categoria" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DataCriacao" Type="datetime" Nullable="false" />
+    <Property Name="Caminho" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Academico_Id" Type="int" Nullable="false" />
     <Property Name="Transacao_Id" Type="int" Nullable="false" />
     <Property Name="Autor_Id" Type="int" Nullable="false" />
@@ -437,11 +438,12 @@
           <NavigationProperty Name="Academico" Relationship="dbModel.AcademicoMedia" FromRole="Media" ToRole="Academico" />
           <NavigationProperty Name="Transacao" Relationship="dbModel.MediaTransacao" FromRole="Media" ToRole="Transacao" />
           <NavigationProperty Name="Autor" Relationship="dbModel.MediaAutor" FromRole="Media" ToRole="Autor" />
-          <Property Name="Publicado" Type="String" Nullable="false" />
+          <Property Name="Publicado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Whislist" Relationship="dbModel.MediaWhislist" FromRole="Media" ToRole="Whislist" />
           <Property Name="Preco" Type="Decimal" Nullable="false" />
           <Property Name="Categoria" Type="String" Nullable="false" />
           <Property Name="DataCriacao" Type="DateTime" Nullable="false" />
+          <Property Name="Caminho" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="AcademicoMedia">
           <End Type="dbModel.Academico" Role="Academico" Multiplicity="1" />
@@ -573,6 +575,7 @@
           <ScalarProperty Name="Preco" ColumnName="Preco" />
           <ScalarProperty Name="Categoria" ColumnName="Categoria" />
           <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+          <ScalarProperty Name="Caminho" ColumnName="Caminho" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(dbModel.Musica)">

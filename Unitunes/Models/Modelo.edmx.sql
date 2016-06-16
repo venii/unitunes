@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/15/2016 21:06:12
+-- Date Created: 06/16/2016 13:44:42
 -- Generated from EDMX file: C:\Users\Vinicius\Desktop\Unitunes_final\Unitunes\Unitunes\Models\Modelo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-
+USE [db];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -41,11 +41,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MediaWhislist]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MediaSet] DROP CONSTRAINT [FK_MediaWhislist];
 GO
-IF OBJECT_ID(N'[dbo].[FK_AcademicoContaAcademico]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AcademicoSet] DROP CONSTRAINT [FK_AcademicoContaAcademico];
-GO
 IF OBJECT_ID(N'[dbo].[FK_AcademicoWhislist]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[WhislistSet] DROP CONSTRAINT [FK_AcademicoWhislist];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AcademicoContaAcademico]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ContaAcademicoSet] DROP CONSTRAINT [FK_AcademicoContaAcademico];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Autor_inherits_Academico]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AcademicoSet_Autor] DROP CONSTRAINT [FK_Autor_inherits_Academico];
@@ -120,10 +120,11 @@ CREATE TABLE [dbo].[MediaSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Nome] nvarchar(max)  NOT NULL,
     [Descricao] nvarchar(max)  NOT NULL,
-    [Publicado] nvarchar(max)  NOT NULL,
+    [Publicado] bit  NOT NULL,
     [Preco] decimal(18,0)  NOT NULL,
     [Categoria] nvarchar(max)  NOT NULL,
     [DataCriacao] datetime  NOT NULL,
+    [Caminho] nvarchar(max)  NOT NULL,
     [Academico_Id] int  NOT NULL,
     [Transacao_Id] int  NOT NULL,
     [Autor_Id] int  NOT NULL,

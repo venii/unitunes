@@ -181,9 +181,11 @@
     <Compile Include="Models\Transacao.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Validacoes\Media.cs" />
     <Compile Include="Models\Video.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\MidiaViewModel.cs" />
     <Compile Include="Models\Whislist.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
@@ -210,7 +212,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\midias\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

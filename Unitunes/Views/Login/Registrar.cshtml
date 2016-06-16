@@ -7,10 +7,7 @@
 <h2>Registrar</h2>
 
  <!-- @Html.ValidationSummary("error") -->
-@if (!ViewData.ModelState.IsValid)
-{
-    @Html.Raw("ERROR: " + @Html.ValidationMessage("error"))
-}
+
 
 
 
@@ -64,3 +61,4 @@
         </div>
     </div>
 }
+@Html.ActionLink("Login", "Login", "Login")
