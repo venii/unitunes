@@ -6,12 +6,20 @@
 
 <h2>Registrar</h2>
 
+ <!-- @Html.ValidationSummary("error") -->
+@if (!ViewData.ModelState.IsValid)
+{
+    @Html.Raw("ERROR: " + @Html.ValidationMessage("error"))
+}
+
+
+
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
 
-    <!-- @Html.ValidationSummary("error") -->
-    @Html.ValidationMessage("error")
+   
 
     <div class="form-horizontal">
         <h4>Academico</h4>

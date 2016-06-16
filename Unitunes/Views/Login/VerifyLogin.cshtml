@@ -3,8 +3,7 @@
     ViewBag.Title = "VerifyLogin";
 }
 
-<h2>VerifyLogin</h2>
+@if (!ViewData.ModelState.IsValid) {
+  @Html.Raw("ERROR: " + @Html.ValidationMessage("error")) 
+}
 
-Login: @ViewBag.login
-<br/>
-Senha: @ViewBag.password 
