@@ -206,6 +206,7 @@
     <Content Include="Views\Login\Registrar.cshtml" />
     <Content Include="Views\Login\Principal.cshtml" />
     <Content Include="Views\Midia\Criar.cshtml" />
+    <Content Include="Views\Midia\Listar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

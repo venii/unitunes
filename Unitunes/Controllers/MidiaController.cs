@@ -40,6 +40,18 @@ namespace Unitunes.Controllers
    
                 return View();
             }
-            
+
+
+            [AcceptVerbs(HttpVerbs.Get)]
+            public ActionResult Listar()
+            {
+                var midiaRepo = Singleton<Midia>.Instance();
+                //passa o model pelo view
+                IEnumerable<Unitunes.Models.Media> media = midiaRepo.GetAll(x => x.);
+                
+                return View(media);
+            }
         }
+        
+        
  }

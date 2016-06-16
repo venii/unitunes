@@ -22,6 +22,8 @@ namespace Unitunes.Models
         public string Categoria { get; set; }
         public System.DateTime DataCriacao { get; set; }
         public string Caminho { get; set; }
-        public Nullable<int> TransacaoId { get; set; }
+        public int AcademicoId { get; set; }
+    
+        public virtual Autor AutorDaMidia { get; set; }
     }
 }

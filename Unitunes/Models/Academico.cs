@@ -17,6 +17,7 @@ namespace Unitunes.Models
         public Academico()
         {
             this.WhislistDoAcademico = new HashSet<Whislist>();
+            this.MediaDoAcademico = new HashSet<Media>();
         }
     
         public int Id { get; set; }
@@ -27,5 +28,6 @@ namespace Unitunes.Models
     
         public virtual ContaAcademico ContaAcademico { get; set; }
         public virtual ICollection<Whislist> WhislistDoAcademico { get; set; }
+        public virtual ICollection<Media> MediaDoAcademico { get; set; }
     }
 }
