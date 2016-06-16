@@ -12,11 +12,7 @@ namespace Unitunes
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            
 
-            /*
-            
-            */
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
         
@@ -31,7 +27,7 @@ namespace Unitunes
             if (Response.StatusCode == 404)
             {
                 Response.ClearContent();
-                Response.Redirect("/Login/Register");
+                Response.Redirect("/Login/Registrar");
             }
         }
     }
