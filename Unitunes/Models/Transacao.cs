@@ -16,14 +16,13 @@ namespace Unitunes.Models
     {
         public Transacao()
         {
-            this.Media = new HashSet<Media>();
+            this.MediaSelecionadas = new HashSet<Media>();
         }
     
         public int Id { get; set; }
         public double valor { get; set; }
     
-        public virtual ICollection<Media> Media { get; set; }
-        public virtual Administrador Administrador { get; set; }
-        public virtual Autor Autor { get; set; }
+        public virtual Academico AcademicoDaTransacao { get; set; }
+        public virtual ICollection<Media> MediaSelecionadas { get; set; }
     }
 }

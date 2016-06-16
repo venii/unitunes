@@ -14,7 +14,5 @@ namespace Unitunes.Models
     
     public partial class Administrador : Autor
     {
-    
-        public virtual Transacao Transacao { get; set; }
     }
 }

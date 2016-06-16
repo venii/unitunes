@@ -15,7 +15,5 @@ namespace Unitunes.Models
     public partial class Musica : Media
     {
         public double Duracao { get; set; }
-    
-        public virtual Album Album { get; set; }
     }
 }

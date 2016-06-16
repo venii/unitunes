@@ -14,17 +14,8 @@ namespace Unitunes.Models
     
     public partial class Album
     {
-        public Album()
-        {
-            this.Musica = new HashSet<Musica>();
-            this.Autor = new HashSet<Autor>();
-        }
-    
         public int Id { get; set; }
         public string Nome { get; set; }
         public System.DateTime DataCriacao { get; set; }
-    
-        public virtual ICollection<Musica> Musica { get; set; }
-        public virtual ICollection<Autor> Autor { get; set; }
     }
 }

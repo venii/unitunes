@@ -9,6 +9,11 @@
 
 <h2>Criar</h2>
 
+@if (!ViewData.ModelState.IsValid)
+{
+    @Html.Raw("ERROR: " + @Html.ValidationMessage("error"))
+}
+
 @using (Html.BeginForm("Criar", "Midia", FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()

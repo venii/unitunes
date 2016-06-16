@@ -14,14 +14,5 @@ namespace Unitunes.Models
     
     public partial class Autor : Academico
     {
-        public Autor()
-        {
-            this.MediaPublicadas = new HashSet<Media>();
-        }
-    
-    
-        public virtual ICollection<Media> MediaPublicadas { get; set; }
-        public virtual Album Album { get; set; }
-        public virtual Transacao Transacao1 { get; set; }
     }
 }

@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/16/2016 13:44:42
+-- Date Created: 06/16/2016 17:23:09
 -- Generated from EDMX file: C:\Users\Vinicius\Desktop\Unitunes_final\Unitunes\Unitunes\Models\Modelo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [db];
+
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -111,7 +111,8 @@ CREATE TABLE [dbo].[AcademicoSet] (
     [Email] nvarchar(max)  NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
     [PrimeiroNome] nvarchar(max)  NOT NULL,
-    [SegundoNome] nvarchar(max)  NOT NULL
+    [SegundoNome] nvarchar(max)  NOT NULL,
+    [TransacaoAcademico_Academico_Id] int  NULL
 );
 GO
 
@@ -125,19 +126,15 @@ CREATE TABLE [dbo].[MediaSet] (
     [Categoria] nvarchar(max)  NOT NULL,
     [DataCriacao] datetime  NOT NULL,
     [Caminho] nvarchar(max)  NOT NULL,
-    [Academico_Id] int  NOT NULL,
-    [Transacao_Id] int  NOT NULL,
-    [Autor_Id] int  NOT NULL,
-    [Whislist_Id] int  NOT NULL
+    [TransacaoId] int  NULL,
+    [MediaWhislist_Media_Id] int  NULL
 );
 GO
 
 -- Creating table 'TransacaoSet'
 CREATE TABLE [dbo].[TransacaoSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [valor] float  NOT NULL,
-    [Administrador_Id] int  NOT NULL,
-    [Autor_Id] int  NOT NULL
+    [valor] float  NOT NULL
 );
 GO
 
@@ -153,7 +150,7 @@ GO
 CREATE TABLE [dbo].[WhislistSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Nome] nvarchar(max)  NOT NULL,
-    [AcademicoWhislist_Whislist_Id] int  NULL
+    [AcademicoId] int  NOT NULL
 );
 GO
 
@@ -165,23 +162,9 @@ CREATE TABLE [dbo].[ContaAcademicoSet] (
 );
 GO
 
--- Creating table 'AcademicoSet_Autor'
-CREATE TABLE [dbo].[AcademicoSet_Autor] (
-    [Id] int  NOT NULL,
-    [Album_Id] int  NOT NULL
-);
-GO
-
 -- Creating table 'MediaSet_Musica'
 CREATE TABLE [dbo].[MediaSet_Musica] (
     [Duracao] float  NOT NULL,
-    [Id] int  NOT NULL,
-    [Album_Id] int  NOT NULL
-);
-GO
-
--- Creating table 'AcademicoSet_Administrador'
-CREATE TABLE [dbo].[AcademicoSet_Administrador] (
     [Id] int  NOT NULL
 );
 GO
@@ -196,6 +179,18 @@ GO
 -- Creating table 'MediaSet_Video'
 CREATE TABLE [dbo].[MediaSet_Video] (
     [Duracao] decimal(18,0)  NOT NULL,
+    [Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'AcademicoSet_Autor'
+CREATE TABLE [dbo].[AcademicoSet_Autor] (
+    [Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'AcademicoSet_Administrador'
+CREATE TABLE [dbo].[AcademicoSet_Administrador] (
     [Id] int  NOT NULL
 );
 GO
@@ -240,21 +235,9 @@ ADD CONSTRAINT [PK_ContaAcademicoSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'AcademicoSet_Autor'
-ALTER TABLE [dbo].[AcademicoSet_Autor]
-ADD CONSTRAINT [PK_AcademicoSet_Autor]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
 -- Creating primary key on [Id] in table 'MediaSet_Musica'
 ALTER TABLE [dbo].[MediaSet_Musica]
 ADD CONSTRAINT [PK_MediaSet_Musica]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [Id] in table 'AcademicoSet_Administrador'
-ALTER TABLE [dbo].[AcademicoSet_Administrador]
-ADD CONSTRAINT [PK_AcademicoSet_Administrador]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -270,144 +253,21 @@ ADD CONSTRAINT [PK_MediaSet_Video]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'AcademicoSet_Autor'
+ALTER TABLE [dbo].[AcademicoSet_Autor]
+ADD CONSTRAINT [PK_AcademicoSet_Autor]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AcademicoSet_Administrador'
+ALTER TABLE [dbo].[AcademicoSet_Administrador]
+ADD CONSTRAINT [PK_AcademicoSet_Administrador]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [Academico_Id] in table 'MediaSet'
-ALTER TABLE [dbo].[MediaSet]
-ADD CONSTRAINT [FK_AcademicoMedia]
-    FOREIGN KEY ([Academico_Id])
-    REFERENCES [dbo].[AcademicoSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AcademicoMedia'
-CREATE INDEX [IX_FK_AcademicoMedia]
-ON [dbo].[MediaSet]
-    ([Academico_Id]);
-GO
-
--- Creating foreign key on [Transacao_Id] in table 'MediaSet'
-ALTER TABLE [dbo].[MediaSet]
-ADD CONSTRAINT [FK_MediaTransacao]
-    FOREIGN KEY ([Transacao_Id])
-    REFERENCES [dbo].[TransacaoSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_MediaTransacao'
-CREATE INDEX [IX_FK_MediaTransacao]
-ON [dbo].[MediaSet]
-    ([Transacao_Id]);
-GO
-
--- Creating foreign key on [Autor_Id] in table 'MediaSet'
-ALTER TABLE [dbo].[MediaSet]
-ADD CONSTRAINT [FK_MediaAutor]
-    FOREIGN KEY ([Autor_Id])
-    REFERENCES [dbo].[AcademicoSet_Autor]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_MediaAutor'
-CREATE INDEX [IX_FK_MediaAutor]
-ON [dbo].[MediaSet]
-    ([Autor_Id]);
-GO
-
--- Creating foreign key on [Album_Id] in table 'MediaSet_Musica'
-ALTER TABLE [dbo].[MediaSet_Musica]
-ADD CONSTRAINT [FK_MusicaAlbum]
-    FOREIGN KEY ([Album_Id])
-    REFERENCES [dbo].[AlbumSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_MusicaAlbum'
-CREATE INDEX [IX_FK_MusicaAlbum]
-ON [dbo].[MediaSet_Musica]
-    ([Album_Id]);
-GO
-
--- Creating foreign key on [Album_Id] in table 'AcademicoSet_Autor'
-ALTER TABLE [dbo].[AcademicoSet_Autor]
-ADD CONSTRAINT [FK_AlbumAutor]
-    FOREIGN KEY ([Album_Id])
-    REFERENCES [dbo].[AlbumSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AlbumAutor'
-CREATE INDEX [IX_FK_AlbumAutor]
-ON [dbo].[AcademicoSet_Autor]
-    ([Album_Id]);
-GO
-
--- Creating foreign key on [Administrador_Id] in table 'TransacaoSet'
-ALTER TABLE [dbo].[TransacaoSet]
-ADD CONSTRAINT [FK_TransacaoAdministrador]
-    FOREIGN KEY ([Administrador_Id])
-    REFERENCES [dbo].[AcademicoSet_Administrador]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TransacaoAdministrador'
-CREATE INDEX [IX_FK_TransacaoAdministrador]
-ON [dbo].[TransacaoSet]
-    ([Administrador_Id]);
-GO
-
--- Creating foreign key on [Autor_Id] in table 'TransacaoSet'
-ALTER TABLE [dbo].[TransacaoSet]
-ADD CONSTRAINT [FK_TransacaoAutor]
-    FOREIGN KEY ([Autor_Id])
-    REFERENCES [dbo].[AcademicoSet_Autor]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TransacaoAutor'
-CREATE INDEX [IX_FK_TransacaoAutor]
-ON [dbo].[TransacaoSet]
-    ([Autor_Id]);
-GO
-
--- Creating foreign key on [Whislist_Id] in table 'MediaSet'
-ALTER TABLE [dbo].[MediaSet]
-ADD CONSTRAINT [FK_MediaWhislist]
-    FOREIGN KEY ([Whislist_Id])
-    REFERENCES [dbo].[WhislistSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_MediaWhislist'
-CREATE INDEX [IX_FK_MediaWhislist]
-ON [dbo].[MediaSet]
-    ([Whislist_Id]);
-GO
-
--- Creating foreign key on [AcademicoWhislist_Whislist_Id] in table 'WhislistSet'
-ALTER TABLE [dbo].[WhislistSet]
-ADD CONSTRAINT [FK_AcademicoWhislist]
-    FOREIGN KEY ([AcademicoWhislist_Whislist_Id])
-    REFERENCES [dbo].[AcademicoSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AcademicoWhislist'
-CREATE INDEX [IX_FK_AcademicoWhislist]
-ON [dbo].[WhislistSet]
-    ([AcademicoWhislist_Whislist_Id]);
-GO
 
 -- Creating foreign key on [AcademicoContaAcademico_ContaAcademico_Id] in table 'ContaAcademicoSet'
 ALTER TABLE [dbo].[ContaAcademicoSet]
@@ -424,13 +284,64 @@ ON [dbo].[ContaAcademicoSet]
     ([AcademicoContaAcademico_ContaAcademico_Id]);
 GO
 
--- Creating foreign key on [Id] in table 'AcademicoSet_Autor'
-ALTER TABLE [dbo].[AcademicoSet_Autor]
-ADD CONSTRAINT [FK_Autor_inherits_Academico]
-    FOREIGN KEY ([Id])
+-- Creating foreign key on [MediaWhislist_Media_Id] in table 'MediaSet'
+ALTER TABLE [dbo].[MediaSet]
+ADD CONSTRAINT [FK_MediaWhislist]
+    FOREIGN KEY ([MediaWhislist_Media_Id])
+    REFERENCES [dbo].[WhislistSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_MediaWhislist'
+CREATE INDEX [IX_FK_MediaWhislist]
+ON [dbo].[MediaSet]
+    ([MediaWhislist_Media_Id]);
+GO
+
+-- Creating foreign key on [TransacaoAcademico_Academico_Id] in table 'AcademicoSet'
+ALTER TABLE [dbo].[AcademicoSet]
+ADD CONSTRAINT [FK_TransacaoAcademico]
+    FOREIGN KEY ([TransacaoAcademico_Academico_Id])
+    REFERENCES [dbo].[TransacaoSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TransacaoAcademico'
+CREATE INDEX [IX_FK_TransacaoAcademico]
+ON [dbo].[AcademicoSet]
+    ([TransacaoAcademico_Academico_Id]);
+GO
+
+-- Creating foreign key on [AcademicoId] in table 'WhislistSet'
+ALTER TABLE [dbo].[WhislistSet]
+ADD CONSTRAINT [FK_AcademicoWhislist]
+    FOREIGN KEY ([AcademicoId])
     REFERENCES [dbo].[AcademicoSet]
         ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AcademicoWhislist'
+CREATE INDEX [IX_FK_AcademicoWhislist]
+ON [dbo].[WhislistSet]
+    ([AcademicoId]);
+GO
+
+-- Creating foreign key on [TransacaoId] in table 'MediaSet'
+ALTER TABLE [dbo].[MediaSet]
+ADD CONSTRAINT [FK_MediaTransacao]
+    FOREIGN KEY ([TransacaoId])
+    REFERENCES [dbo].[TransacaoSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_MediaTransacao'
+CREATE INDEX [IX_FK_MediaTransacao]
+ON [dbo].[MediaSet]
+    ([TransacaoId]);
 GO
 
 -- Creating foreign key on [Id] in table 'MediaSet_Musica'
@@ -438,15 +349,6 @@ ALTER TABLE [dbo].[MediaSet_Musica]
 ADD CONSTRAINT [FK_Musica_inherits_Media]
     FOREIGN KEY ([Id])
     REFERENCES [dbo].[MediaSet]
-        ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Id] in table 'AcademicoSet_Administrador'
-ALTER TABLE [dbo].[AcademicoSet_Administrador]
-ADD CONSTRAINT [FK_Administrador_inherits_Autor]
-    FOREIGN KEY ([Id])
-    REFERENCES [dbo].[AcademicoSet_Autor]
         ([Id])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
@@ -465,6 +367,24 @@ ALTER TABLE [dbo].[MediaSet_Video]
 ADD CONSTRAINT [FK_Video_inherits_Media]
     FOREIGN KEY ([Id])
     REFERENCES [dbo].[MediaSet]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Id] in table 'AcademicoSet_Autor'
+ALTER TABLE [dbo].[AcademicoSet_Autor]
+ADD CONSTRAINT [FK_Autor_inherits_Academico]
+    FOREIGN KEY ([Id])
+    REFERENCES [dbo].[AcademicoSet]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Id] in table 'AcademicoSet_Administrador'
+ALTER TABLE [dbo].[AcademicoSet_Administrador]
+ADD CONSTRAINT [FK_Administrador_inherits_Autor]
+    FOREIGN KEY ([Id])
+    REFERENCES [dbo].[AcademicoSet_Autor]
         ([Id])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO

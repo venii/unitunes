@@ -137,6 +137,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Abstratos\Singleton.cs" />
     <Compile Include="Models\Academico.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
@@ -152,6 +153,7 @@
     <Compile Include="Models\ContaAcademico.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contratos\IRepository.cs" />
     <Compile Include="Models\Livro.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
@@ -173,8 +175,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelosApp\Academico.cs" />
-    <Compile Include="Models\ModelosApp\Midia.cs" />
+    <Compile Include="Models\Repositorios\Academico.cs" />
+    <Compile Include="Models\Repositorios\Midia.cs" />
     <Compile Include="Models\Musica.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
