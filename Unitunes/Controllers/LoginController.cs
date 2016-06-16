@@ -40,6 +40,7 @@ namespace Unitunes.Controllers
 
             if (Unitunes.Models.ModelosApp.Academico.isAcademicoExists(novoLogin))
             {
+                Unitunes.Models.ModelosApp.Academico.autenticar(novoLogin);
                 return Redirect("/Login/Principal");
 
             }
@@ -89,12 +90,21 @@ namespace Unitunes.Controllers
             }
             return View();
         }
+
         //necessita login
+        [Authorize]
+        public ActionResult Logout()
+        {
+            Unitunes.Models.ModelosApp.Academico.logoff();
+            return Redirect("/Login/Login");
+        }
+
+        //necessita loginUnitunes.Models
         [Authorize]
         public ActionResult Principal()
         {
             //passa o model pelo view
-            IEnumerable<Unitunes.Models.Media> media = new List<Unitunes.Models.Media>();
+            IEnumerable<Unitunes.Models.Media> media = new List<Media>();
             return View(media);
         }
         

@@ -43,7 +43,7 @@ namespace Unitunes.Models.ModelosApp
             if (Academico.isAcademicoExists(academico))
             {
                 //authentica
-                System.Web.Security.FormsAuthentication.SetAuthCookie("auth",true);
+                System.Web.Security.FormsAuthentication.SetAuthCookie(academico.Email, false);
                 //grava academico no session
                 HttpContext.Current.Session["Academico"] = academico;
                 return true;

@@ -6,4 +6,8 @@
 @if (!ViewData.ModelState.IsValid) {
   @Html.Raw("ERROR: " + @Html.ValidationMessage("error")) 
 }
+<br />
+<br/>
+@Html.ActionLink("Login", "Login", "Login")
 
+@Html.ActionLink("Registrar", "Login", "Registrar")
