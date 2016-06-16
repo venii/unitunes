@@ -12,7 +12,27 @@ namespace Unitunes
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            
+
+            /*
+            
+            */
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+        }
+        
+        void Application_EndRequest(object sender, System.EventArgs e)
+        {
+            // redireciona para login se nao tiver autorizado
+            if (Response.StatusCode == 401)
+            {
+                Response.ClearContent();
+                Response.Redirect("/Login/Login");
+            }
+            if (Response.StatusCode == 404)
+            {
+                Response.ClearContent();
+                Response.Redirect("/Login/Register");
+            }
         }
     }
 }

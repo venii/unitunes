@@ -133,6 +133,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MidiaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,6 +174,7 @@
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelosApp\Academico.cs" />
+    <Compile Include="Models\ModelosApp\Midia.cs" />
     <Compile Include="Models\Musica.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
@@ -198,6 +200,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Login\Registrar.cshtml" />
+    <Content Include="Views\Login\Principal.cshtml" />
+    <Content Include="Views\Midia\Criar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

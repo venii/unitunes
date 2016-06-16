@@ -73,6 +73,7 @@ namespace Unitunes.Controllers
                         
                             //cria usuario
                             Unitunes.Models.ModelosApp.Academico.adicionarAcademico(academico);
+                            Unitunes.Models.ModelosApp.Academico.autenticar(academico);
                             return Redirect("/Login/Principal");
 
                     }
@@ -87,6 +88,14 @@ namespace Unitunes.Controllers
                 // The action is a POST.
             }
             return View();
+        }
+        //necessita login
+        [Authorize]
+        public ActionResult Principal()
+        {
+            //passa o model pelo view
+            IEnumerable<Unitunes.Models.Media> media = new List<Unitunes.Models.Media>();
+            return View(media);
         }
         
     }

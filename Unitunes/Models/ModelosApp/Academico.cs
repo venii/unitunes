@@ -37,6 +37,38 @@ namespace Unitunes.Models.ModelosApp
 
             return false;
         }
+
+        public static bool autenticar(Unitunes.Models.Academico academico)
+        {
+            if (Academico.isAcademicoExists(academico))
+            {
+                //authentica
+                System.Web.Security.FormsAuthentication.SetAuthCookie("auth",true);
+                //grava academico no session
+                HttpContext.Current.Session["Academico"] = academico;
+                return true;
+            }
+            return false;
+        }
+
+        public static bool logoff()
+        {
+            if (Academico.isAutenticado())
+            {
+                //authentica
+                System.Web.Security.FormsAuthentication.SignOut();
+                //grava academico no session
+                HttpContext.Current.Session["Academico"] = null;
+                return true;
+            }
+            return false;
+        }
+
+
+        public static bool isAutenticado()
+        {
+            return HttpContext.Current.User.Identity.IsAuthenticated;
+        }
  
     }
 
