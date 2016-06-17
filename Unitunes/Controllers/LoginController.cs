@@ -29,7 +29,7 @@ namespace Unitunes.Controllers
         {
 
             var ctx = new dbEntities();
-            
+
             var login = ctx.AcademicoSet;
             String requestU = Request["login"];
             String requestP = Request["password"];
@@ -61,10 +61,11 @@ namespace Unitunes.Controllers
                 //verifica se existe o registro
                 //quando enviar o post
 
-                if (academico.Email != null && academico.Password != null)
+                if (ModelState.IsValid)
                 {
 
                     var ctx = new dbEntities();
+
                     var academicos = ctx.AcademicoSet;
                     
                     
@@ -103,6 +104,7 @@ namespace Unitunes.Controllers
         [Authorize]
         public ActionResult Principal()
         {
+            ViewBag.nome = Unitunes.Models.ModelosApp.Academico.getIdNome();
             //passa o model pelo view
             IEnumerable<Unitunes.Models.Media> media = new List<Media>();
             return View(media);

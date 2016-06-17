@@ -24,11 +24,34 @@ namespace Unitunes.Models.ModelosApp
             }
             return null;
         }
+        //pega todas midias do academico
+        public IQueryable<Media> GetByIdAcademico(int id)
+        {
+            var ctx = new dbEntities();
+            
+            var medias = ctx.MediaSet;
+            var academico = ctx.AcademicoSet;
+
+            //join academico x medias
+            var minhaMidia      = from m in medias
+                                join a in academico on m.AcademicoId equals a.Id
+                                where a.Id == id
+                                select m;
+
+            if (minhaMidia.Count() > 0)
+            {
+                return minhaMidia;
+            }
+            return null;
+        }
+
 
         public IQueryable<Media> GetAll(Expression<Func<Media, bool>> filter)
         {
-            var l = new List<Media>().AsQueryable();
-            return l;
+            var ctx = new dbEntities();
+            var medias = ctx.MediaSet.Where(filter);
+
+            return medias;
         }
 
         public bool Save(Media entity)

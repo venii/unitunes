@@ -29,6 +29,8 @@ namespace Unitunes.Controllers
                             midiaViewModel.arquivoUpload.SaveAs(path);
                             
                             midiaViewModel.midia.Caminho = path;
+                            //relaciona o id do acadamico na sessao e relaciona na media
+                            midiaViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
 
                             var midiaRepo = Singleton<Midia>.Instance();
                             int idSave = midiaRepo.SaveModel(midiaViewModel.midia);
@@ -47,9 +49,12 @@ namespace Unitunes.Controllers
             {
                 var midiaRepo = Singleton<Midia>.Instance();
                 //passa o model pelo view
-                IEnumerable<Unitunes.Models.Media> media = midiaRepo.GetAll(x => x.);
-                
-                return View(media);
+                int id = Unitunes.Models.ModelosApp.Academico.getId();
+
+                var minhasMidias = midiaRepo.GetByIdAcademico(id);
+
+
+                return View(minhasMidias);
             }
         }
         
