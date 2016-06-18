@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using System.Web.Mvc;
 using Unitunes.Models.Abstratos;
 using Unitunes.Models.Contratos;
 
@@ -91,15 +94,23 @@ namespace Unitunes.Models.ModelosApp
         public bool Update(Media entity)
         {
             var ctx = new dbEntities();
-            var medias = ctx.MediaSet;
+            //var medias = ctx.MediaSet;
             try
             {
+
                 
+               ctx.Entry<Media>(entity).State = System.Data.Entity.EntityState.Modified;
                ctx.SaveChanges();
 
                return true;
                 
             }
+            catch (DbUpdateException ex)
+            {
+                var e1 = ex.Message;
+                return false;
+            }
+           
             catch (Exception e)
             {
                 return false;

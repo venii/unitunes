@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/18/2016 14:51:27
+-- Date Created: 06/18/2016 17:47:46
 -- Generated from EDMX file: C:\Users\Vinicius\Desktop\Unitunes_final\Unitunes\Unitunes\Models\Modelo.edmx
 -- --------------------------------------------------
 
@@ -29,9 +29,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_AcademicoWhislist]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[WhislistSet] DROP CONSTRAINT [FK_AcademicoWhislist];
 GO
-IF OBJECT_ID(N'[dbo].[FK_MediaAutor]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AcademicoSet_Autor] DROP CONSTRAINT [FK_MediaAutor];
-GO
 IF OBJECT_ID(N'[dbo].[FK_AcademicoMedia]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MediaSet] DROP CONSTRAINT [FK_AcademicoMedia];
 GO
@@ -44,9 +41,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_TransacaoMedia_Media]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TransacaoMedia] DROP CONSTRAINT [FK_TransacaoMedia_Media];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Autor_inherits_Academico]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AcademicoSet_Autor] DROP CONSTRAINT [FK_Autor_inherits_Academico];
-GO
 IF OBJECT_ID(N'[dbo].[FK_Musica_inherits_Media]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MediaSet_Musica] DROP CONSTRAINT [FK_Musica_inherits_Media];
 GO
@@ -55,6 +49,9 @@ IF OBJECT_ID(N'[dbo].[FK_Livro_inherits_Media]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_Video_inherits_Media]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MediaSet_Video] DROP CONSTRAINT [FK_Video_inherits_Media];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Autor_inherits_Academico]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AcademicoSet_Autor] DROP CONSTRAINT [FK_Autor_inherits_Academico];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Administrador_inherits_Autor]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AcademicoSet_Administrador] DROP CONSTRAINT [FK_Administrador_inherits_Autor];
@@ -82,9 +79,6 @@ GO
 IF OBJECT_ID(N'[dbo].[ContaAcademicoSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ContaAcademicoSet];
 GO
-IF OBJECT_ID(N'[dbo].[AcademicoSet_Autor]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AcademicoSet_Autor];
-GO
 IF OBJECT_ID(N'[dbo].[MediaSet_Musica]', 'U') IS NOT NULL
     DROP TABLE [dbo].[MediaSet_Musica];
 GO
@@ -93,6 +87,9 @@ IF OBJECT_ID(N'[dbo].[MediaSet_Livro]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[MediaSet_Video]', 'U') IS NOT NULL
     DROP TABLE [dbo].[MediaSet_Video];
+GO
+IF OBJECT_ID(N'[dbo].[AcademicoSet_Autor]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AcademicoSet_Autor];
 GO
 IF OBJECT_ID(N'[dbo].[AcademicoSet_Administrador]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AcademicoSet_Administrador];
@@ -129,7 +126,7 @@ CREATE TABLE [dbo].[MediaSet] (
     [Preco] decimal(18,0)  NOT NULL,
     [Categoria] nvarchar(max)  NOT NULL,
     [DataCriacao] datetime  NOT NULL,
-    [Caminho] nvarchar(max)  NOT NULL,
+    [Caminho] nvarchar(max)  NULL,
     [AcademicoId] int  NOT NULL,
     [Ativo] bit  NOT NULL
 );
@@ -169,14 +166,6 @@ CREATE TABLE [dbo].[ContaAcademicoSet] (
 );
 GO
 
--- Creating table 'AcademicoSet_Autor'
-CREATE TABLE [dbo].[AcademicoSet_Autor] (
-    [MediaId] int  NOT NULL,
-    [Id] int  NOT NULL,
-    [MediaAutor_Autor_Id] int  NOT NULL
-);
-GO
-
 -- Creating table 'MediaSet_Musica'
 CREATE TABLE [dbo].[MediaSet_Musica] (
     [Duracao] float  NOT NULL,
@@ -194,6 +183,12 @@ GO
 -- Creating table 'MediaSet_Video'
 CREATE TABLE [dbo].[MediaSet_Video] (
     [Duracao] decimal(18,0)  NOT NULL,
+    [Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'AcademicoSet_Autor'
+CREATE TABLE [dbo].[AcademicoSet_Autor] (
     [Id] int  NOT NULL
 );
 GO
@@ -258,12 +253,6 @@ ADD CONSTRAINT [PK_ContaAcademicoSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'AcademicoSet_Autor'
-ALTER TABLE [dbo].[AcademicoSet_Autor]
-ADD CONSTRAINT [PK_AcademicoSet_Autor]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
 -- Creating primary key on [Id] in table 'MediaSet_Musica'
 ALTER TABLE [dbo].[MediaSet_Musica]
 ADD CONSTRAINT [PK_MediaSet_Musica]
@@ -279,6 +268,12 @@ GO
 -- Creating primary key on [Id] in table 'MediaSet_Video'
 ALTER TABLE [dbo].[MediaSet_Video]
 ADD CONSTRAINT [PK_MediaSet_Video]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AcademicoSet_Autor'
+ALTER TABLE [dbo].[AcademicoSet_Autor]
+ADD CONSTRAINT [PK_AcademicoSet_Autor]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -358,21 +353,6 @@ ON [dbo].[WhislistSet]
     ([AcademicoId]);
 GO
 
--- Creating foreign key on [MediaAutor_Autor_Id] in table 'AcademicoSet_Autor'
-ALTER TABLE [dbo].[AcademicoSet_Autor]
-ADD CONSTRAINT [FK_MediaAutor]
-    FOREIGN KEY ([MediaAutor_Autor_Id])
-    REFERENCES [dbo].[MediaSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_MediaAutor'
-CREATE INDEX [IX_FK_MediaAutor]
-ON [dbo].[AcademicoSet_Autor]
-    ([MediaAutor_Autor_Id]);
-GO
-
 -- Creating foreign key on [AcademicoId] in table 'MediaSet'
 ALTER TABLE [dbo].[MediaSet]
 ADD CONSTRAINT [FK_AcademicoMedia]
@@ -427,15 +407,6 @@ ON [dbo].[TransacaoMedia]
     ([MediasTransacao_Id]);
 GO
 
--- Creating foreign key on [Id] in table 'AcademicoSet_Autor'
-ALTER TABLE [dbo].[AcademicoSet_Autor]
-ADD CONSTRAINT [FK_Autor_inherits_Academico]
-    FOREIGN KEY ([Id])
-    REFERENCES [dbo].[AcademicoSet]
-        ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-GO
-
 -- Creating foreign key on [Id] in table 'MediaSet_Musica'
 ALTER TABLE [dbo].[MediaSet_Musica]
 ADD CONSTRAINT [FK_Musica_inherits_Media]
@@ -459,6 +430,15 @@ ALTER TABLE [dbo].[MediaSet_Video]
 ADD CONSTRAINT [FK_Video_inherits_Media]
     FOREIGN KEY ([Id])
     REFERENCES [dbo].[MediaSet]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Id] in table 'AcademicoSet_Autor'
+ALTER TABLE [dbo].[AcademicoSet_Autor]
+ADD CONSTRAINT [FK_Autor_inherits_Academico]
+    FOREIGN KEY ([Id])
+    REFERENCES [dbo].[AcademicoSet]
         ([Id])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
