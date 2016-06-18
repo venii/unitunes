@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="15b994e8088442749bf87735e8dd7d23" Name="Diagram1" ZoomLevel="97" >
+        <EntityTypeShape EntityType="dbModel.Academico" Width="1.5" PointX="2.625" PointY="0.625" />
+        <EntityTypeShape EntityType="dbModel.Media" Width="1.5" PointX="10.25" PointY="0.5" />
+        <EntityTypeShape EntityType="dbModel.Transacao" PointX="4.375" PointY="7.75" Width="1.5" />
+        <EntityTypeShape EntityType="dbModel.Musica" Width="1.5" PointX="7.875" PointY="5.125" />
+        <InheritanceConnector EntityType="dbModel.Musica" />
+        <EntityTypeShape EntityType="dbModel.Livro" Width="1.5" PointX="10.25" PointY="5.125" />
+        <InheritanceConnector EntityType="dbModel.Livro" />
+        <EntityTypeShape EntityType="dbModel.Video" Width="1.5" PointX="12.875" PointY="5.125" />
+        <InheritanceConnector EntityType="dbModel.Video" />
+        <EntityTypeShape EntityType="dbModel.Autor" PointX="2.625" PointY="4.125" Width="1.5" />
+        <InheritanceConnector EntityType="dbModel.Autor" />
+        <EntityTypeShape EntityType="dbModel.Administrador" Width="1.5" PointX="1.875" PointY="7.5" />
+        <InheritanceConnector EntityType="dbModel.Administrador" />
+        <EntityTypeShape EntityType="dbModel.Album" Width="1.5" PointX="5" PointY="5.25" />
+        <EntityTypeShape EntityType="dbModel.Whislist" Width="1.5" PointX="7.5" PointY="0.5" />
+        <EntityTypeShape EntityType="dbModel.ContaAcademico" PointX="6.375" PointY="7.75" Width="1.5" />
+        <EntityTypeShape EntityType="dbModel.AcademicoSet" Width="1.5" PointX="4.375" PointY="14" />
+        <EntityTypeShape EntityType="dbModel.AcademicoSet_Administrador" Width="1.5" PointX="8.875" PointY="10.75" />
+        <EntityTypeShape EntityType="dbModel.AcademicoSet_Autor" Width="1.5" PointX="6.625" PointY="10.25" />
+        <EntityTypeShape EntityType="dbModel.AlbumSet" Width="1.5" PointX="4.375" PointY="10.5" />
+        <EntityTypeShape EntityType="dbModel.ContaAcademicoSet" Width="1.5" PointX="2.125" PointY="14.75" />
+        <EntityTypeShape EntityType="dbModel.MediaSet" Width="1.5" PointX="13.375" PointY="9.25" />
+        <EntityTypeShape EntityType="dbModel.MediaSet_Livro" Width="1.5" PointX="15.625" PointY="14.625" />
+        <EntityTypeShape EntityType="dbModel.MediaSet_Musica" Width="1.5" PointX="18.625" PointY="10.5" />
+        <EntityTypeShape EntityType="dbModel.MediaSet_Video" Width="1.5" PointX="15.625" PointY="9.5" />
+        <EntityTypeShape EntityType="dbModel.TransacaoSet" Width="1.5" PointX="11.125" PointY="10.25" />
+        <EntityTypeShape EntityType="dbModel.WhislistSet" Width="1.5" PointX="11.125" PointY="13.5" />
+        <AssociationConnector Association="dbModel.FK_AcademicoContaAcademico" />
+        <AssociationConnector Association="dbModel.FK_AcademicoMedia" />
+        <AssociationConnector Association="dbModel.FK_Autor_inherits_Academico" />
+        <AssociationConnector Association="dbModel.FK_WhislistAcademico" />
+        <AssociationConnector Association="dbModel.FK_Administrador_inherits_Autor" />
+        <AssociationConnector Association="dbModel.FK_TransacaoAdministrador" />
+        <AssociationConnector Association="dbModel.FK_AlbumAutor" />
+        <AssociationConnector Association="dbModel.FK_MediaAutor" />
+        <AssociationConnector Association="dbModel.FK_TransacaoAutor" />
+        <AssociationConnector Association="dbModel.FK_MusicaAlbum" />
+        <AssociationConnector Association="dbModel.FK_Livro_inherits_Media" />
+        <AssociationConnector Association="dbModel.FK_MediaTransacao" />
+        <AssociationConnector Association="dbModel.FK_MediaWhislist" />
+        <AssociationConnector Association="dbModel.FK_Musica_inherits_Media" />
+        <AssociationConnector Association="dbModel.FK_Video_inherits_Media" />
+        <AssociationConnector Association="dbModel.AcademicoContaAcademico" />
+        <AssociationConnector Association="dbModel.MediaWhislist" />
+        <AssociationConnector Association="dbModel.AcademicoWhislist" />
+        <AssociationConnector Association="dbModel.AcademicoMedia" />
+        <AssociationConnector Association="dbModel.TransacaoAcademico" />
+        <AssociationConnector Association="dbModel.TransacaoMedia" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
