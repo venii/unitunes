@@ -4,11 +4,17 @@
 }
 
 <h2>Login</h2>
-<form action="/Login/VerifyLogin" method="POST">
+<form action="/Login/Login" method="POST">
 
-    Login:<input type="text" name="login" /><br/>
+    Login:<input type="text" name="login" style="margin-left:28px" /><br/>
     Password:<input type="password" name="password" /><br /><br />
     <input type="submit" name="Submit" value="Login!" />
 
 </form>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    @Html.Raw(@Html.ValidationMessage("error"))
+}
+<br/>
 @Html.ActionLink("Registrar", "Login", "Registrar")

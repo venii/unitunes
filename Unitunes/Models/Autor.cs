@@ -14,6 +14,5 @@ namespace Unitunes.Models
     
     public partial class Autor : Academico
     {
-        public int MediaId { get; set; }
     }
 }

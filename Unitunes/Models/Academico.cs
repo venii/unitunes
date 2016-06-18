@@ -25,6 +25,7 @@ namespace Unitunes.Models
         public string Password { get; set; }
         public string PrimeiroNome { get; set; }
         public string SegundoNome { get; set; }
+        public bool Ativo { get; set; }
     
         public virtual ContaAcademico ContaAcademico { get; set; }
         public virtual ICollection<Whislist> WhislistDoAcademico { get; set; }

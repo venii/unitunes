@@ -16,5 +16,6 @@ namespace Unitunes.Models
     {
         public int Id { get; set; }
         public double Credito { get; set; }
+        public bool Ativo { get; set; }
     }
 }

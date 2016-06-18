@@ -10,11 +10,7 @@ namespace Unitunes.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
-        public ActionResult Index()
-        {
-            return View();
-        }
+
 
         // GET: Login
         public ActionResult Login()
@@ -23,20 +19,14 @@ namespace Unitunes.Controllers
             return View();
         }
 
-        // POST: VerifyLogin
+        // POST: Login
         [HttpPost]
-        public ActionResult VerifyLogin()
+        public ActionResult Login(string login,string password)
         {
 
-            var ctx = new dbEntities();
-
-            var login = ctx.AcademicoSet;
-            String requestU = Request["login"];
-            String requestP = Request["password"];
-
             Academico novoLogin = new Academico();
-            novoLogin.Email = requestU;
-            novoLogin.Password = requestP;
+            novoLogin.Email = login;
+            novoLogin.Password = password;
 
             if (Unitunes.Models.ModelosApp.Academico.isAcademicoExists(novoLogin))
             {
@@ -53,44 +43,52 @@ namespace Unitunes.Controllers
 
         }
 
-        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult Registrar(Academico academico)
+        //GET : REGISTAR
+        public ActionResult Registrar()
         {
-            if (HttpContext.Request.HttpMethod == "POST")
-            {
-                //verifica se existe o registro
-                //quando enviar o post
-
-                if (ModelState.IsValid)
-                {
-
-                    var ctx = new dbEntities();
-
-                    var academicos = ctx.AcademicoSet;
-                    
-                    
-                    //verifica se usuario nao existe
-                    if (!Unitunes.Models.ModelosApp.Academico.isAcademicoExists(academico))
-                    {
-                        
-                            //cria usuario
-                            Unitunes.Models.ModelosApp.Academico.adicionarAcademico(academico);
-                            Unitunes.Models.ModelosApp.Academico.autenticar(academico);
-                            return Redirect("/Login/Principal");
-
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("error", "Usuario Já existe");
-                    }
-                }
-                else { 
-                    ModelState.AddModelError("error", "Preencha o formulario corretamente");
-                }
-                // The action is a POST.
-            }
+       
             return View();
         }
+
+        //POST : REGISTRAR
+        [HttpPost]
+        public ActionResult Registrar(Academico academico)
+        {
+            
+            //verifica se existe o registro
+            //quando enviar o post
+
+            if (ModelState.IsValid)
+            {
+
+                var ctx = new dbEntities();
+
+                var academicos = ctx.AcademicoSet;
+
+
+                //verifica se usuario nao existe
+                if (!Unitunes.Models.ModelosApp.Academico.isAcademicoExists(academico))
+                {
+
+                    //cria usuario
+                    Unitunes.Models.ModelosApp.Academico.adicionarAcademico(academico);
+                    Unitunes.Models.ModelosApp.Academico.autenticar(academico);
+                    return Redirect("/Login/Principal");
+
+                }
+                else
+                {
+                    ModelState.AddModelError("error", "Usuario Já existe");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("error", "Preencha o formulario corretamente");
+            }
+                // The action is a POST.
+            return View();
+        }
+
 
         //necessita login
         [Authorize]

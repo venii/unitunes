@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/16/2016 21:53:34
+-- Date Created: 06/18/2016 14:51:27
 -- Generated from EDMX file: C:\Users\Vinicius\Desktop\Unitunes_final\Unitunes\Unitunes\Models\Modelo.edmx
 -- --------------------------------------------------
 
@@ -20,8 +20,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_AcademicoContaAcademico]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ContaAcademicoSet] DROP CONSTRAINT [FK_AcademicoContaAcademico];
 GO
-IF OBJECT_ID(N'[dbo].[FK_MediaWhislist]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MediaSet] DROP CONSTRAINT [FK_MediaWhislist];
+IF OBJECT_ID(N'[dbo].[FK_MediaWhislist_Media]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MediaWhislist] DROP CONSTRAINT [FK_MediaWhislist_Media];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MediaWhislist_Whislist]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MediaWhislist] DROP CONSTRAINT [FK_MediaWhislist_Whislist];
 GO
 IF OBJECT_ID(N'[dbo].[FK_AcademicoWhislist]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[WhislistSet] DROP CONSTRAINT [FK_AcademicoWhislist];
@@ -94,6 +97,9 @@ GO
 IF OBJECT_ID(N'[dbo].[AcademicoSet_Administrador]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AcademicoSet_Administrador];
 GO
+IF OBJECT_ID(N'[dbo].[MediaWhislist]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MediaWhislist];
+GO
 IF OBJECT_ID(N'[dbo].[TransacaoMedia]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TransacaoMedia];
 GO
@@ -109,6 +115,7 @@ CREATE TABLE [dbo].[AcademicoSet] (
     [Password] nvarchar(max)  NOT NULL,
     [PrimeiroNome] nvarchar(max)  NOT NULL,
     [SegundoNome] nvarchar(max)  NOT NULL,
+    [Ativo] bit  NOT NULL,
     [TransacaoAcademico_Academico_Id] int  NULL
 );
 GO
@@ -123,14 +130,16 @@ CREATE TABLE [dbo].[MediaSet] (
     [Categoria] nvarchar(max)  NOT NULL,
     [DataCriacao] datetime  NOT NULL,
     [Caminho] nvarchar(max)  NOT NULL,
-    [AcademicoId] int  NOT NULL
+    [AcademicoId] int  NOT NULL,
+    [Ativo] bit  NOT NULL
 );
 GO
 
 -- Creating table 'TransacaoSet'
 CREATE TABLE [dbo].[TransacaoSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [valor] float  NOT NULL
+    [Valor] float  NOT NULL,
+    [Ativo] bit  NOT NULL
 );
 GO
 
@@ -146,7 +155,8 @@ GO
 CREATE TABLE [dbo].[WhislistSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Nome] nvarchar(max)  NOT NULL,
-    [AcademicoId] int  NOT NULL
+    [AcademicoId] int  NOT NULL,
+    [Ativo] bit  NOT NULL
 );
 GO
 
@@ -154,6 +164,7 @@ GO
 CREATE TABLE [dbo].[ContaAcademicoSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Credito] float  NOT NULL,
+    [Ativo] bit  NOT NULL,
     [AcademicoContaAcademico_ContaAcademico_Id] int  NOT NULL
 );
 GO

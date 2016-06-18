@@ -10,7 +10,6 @@ namespace Unitunes.Models.ViewModel
     {
         [Required]
         public Media midia { get; set; }
-        [Required]
         public HttpPostedFileBase    arquivoUpload { get; set; }
 
     }

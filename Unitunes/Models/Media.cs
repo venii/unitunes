@@ -23,7 +23,6 @@ namespace Unitunes.Models
         public System.DateTime DataCriacao { get; set; }
         public string Caminho { get; set; }
         public int AcademicoId { get; set; }
-    
-        public virtual Autor AutorDaMidia { get; set; }
+        public bool Ativo { get; set; }
     }
 }

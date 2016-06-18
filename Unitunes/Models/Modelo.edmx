@@ -4,364 +4,333 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="dbModelStoreContainer">
-    <EntitySet Name="AcademicoSet" EntityType="dbModel.Store.AcademicoSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MediaSet" EntityType="dbModel.Store.MediaSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TransacaoSet" EntityType="dbModel.Store.TransacaoSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="AlbumSet" EntityType="dbModel.Store.AlbumSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="WhislistSet" EntityType="dbModel.Store.WhislistSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ContaAcademicoSet" EntityType="dbModel.Store.ContaAcademicoSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="AcademicoSet_Autor" EntityType="dbModel.Store.AcademicoSet_Autor" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MediaSet_Musica" EntityType="dbModel.Store.MediaSet_Musica" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MediaSet_Livro" EntityType="dbModel.Store.MediaSet_Livro" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MediaSet_Video" EntityType="dbModel.Store.MediaSet_Video" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="AcademicoSet_Administrador" EntityType="dbModel.Store.AcademicoSet_Administrador" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MediaWhislist" EntityType="dbModel.Store.MediaWhislist" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TransacaoMedia" EntityType="dbModel.Store.TransacaoMedia" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="AcademicoContaAcademico" Association="dbModel.Store.AcademicoContaAcademico">
-      <End Role="Academico" EntitySet="AcademicoSet" />
-      <End Role="ContaAcademico" EntitySet="ContaAcademicoSet" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MediaWhislist_Media" Association="dbModel.Store.FK_MediaWhislist_Media">
-      <End Role="Media" EntitySet="MediaSet" />
-      <End Role="MediaWhislist" EntitySet="MediaWhislist" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MediaWhislist_Whislist" Association="dbModel.Store.FK_MediaWhislist_Whislist">
-      <End Role="Whislist" EntitySet="WhislistSet" />
-      <End Role="MediaWhislist" EntitySet="MediaWhislist" />
-    </AssociationSet>
-    <AssociationSet Name="AcademicoWhislist" Association="dbModel.Store.AcademicoWhislist">
-      <End Role="Academico" EntitySet="AcademicoSet" />
-      <End Role="Whislist" EntitySet="WhislistSet" />
-    </AssociationSet>
-    <AssociationSet Name="MediaAutor" Association="dbModel.Store.MediaAutor">
-      <End Role="Media" EntitySet="MediaSet" />
-      <End Role="Autor" EntitySet="AcademicoSet_Autor" />
-    </AssociationSet>
-    <AssociationSet Name="AcademicoMedia" Association="dbModel.Store.AcademicoMedia">
-      <End Role="Academico" EntitySet="AcademicoSet" />
-      <End Role="Media" EntitySet="MediaSet" />
-    </AssociationSet>
-    <AssociationSet Name="TransacaoAcademico" Association="dbModel.Store.TransacaoAcademico">
-      <End Role="Transacao" EntitySet="TransacaoSet" />
-      <End Role="Academico" EntitySet="AcademicoSet" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TransacaoMedia_Transacao" Association="dbModel.Store.FK_TransacaoMedia_Transacao">
-      <End Role="Transacao" EntitySet="TransacaoSet" />
-      <End Role="TransacaoMedia" EntitySet="TransacaoMedia" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TransacaoMedia_Media" Association="dbModel.Store.FK_TransacaoMedia_Media">
-      <End Role="Media" EntitySet="MediaSet" />
-      <End Role="TransacaoMedia" EntitySet="TransacaoMedia" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Autor_inherits_Academico" Association="dbModel.Store.FK_Autor_inherits_Academico">
-      <End Role="Academico" EntitySet="AcademicoSet" />
-      <End Role="Autor" EntitySet="AcademicoSet_Autor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Musica_inherits_Media" Association="dbModel.Store.FK_Musica_inherits_Media">
-      <End Role="Media" EntitySet="MediaSet" />
-      <End Role="Musica" EntitySet="MediaSet_Musica" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Livro_inherits_Media" Association="dbModel.Store.FK_Livro_inherits_Media">
-      <End Role="Media" EntitySet="MediaSet" />
-      <End Role="Livro" EntitySet="MediaSet_Livro" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Video_inherits_Media" Association="dbModel.Store.FK_Video_inherits_Media">
-      <End Role="Media" EntitySet="MediaSet" />
-      <End Role="Video" EntitySet="MediaSet_Video" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Administrador_inherits_Autor" Association="dbModel.Store.FK_Administrador_inherits_Autor">
-      <End Role="Autor" EntitySet="AcademicoSet_Autor" />
-      <End Role="Administrador" EntitySet="AcademicoSet_Administrador" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="AcademicoSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PrimeiroNome" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SegundoNome" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TransacaoAcademico_Academico_Id" Type="int" Nullable="true" />
-  </EntityType>
-  <EntityType Name="MediaSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Publicado" Type="bit" Nullable="false" />
-    <Property Name="Preco" Type="decimal" Nullable="false" />
-    <Property Name="Categoria" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DataCriacao" Type="datetime" Nullable="false" />
-    <Property Name="Caminho" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AcademicoId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="TransacaoSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="valor" Type="float" Nullable="false" />
-  </EntityType>
-  <EntityType Name="AlbumSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DataCriacao" Type="datetime" Nullable="false" />
-  </EntityType>
-  <EntityType Name="WhislistSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AcademicoId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ContaAcademicoSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Credito" Type="float" Nullable="false" />
-    <Property Name="AcademicoContaAcademico_ContaAcademico_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="AcademicoSet_Autor">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="MediaId" Type="int" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="MediaAutor_Autor_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="MediaSet_Musica">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Duracao" Type="float" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="MediaSet_Livro">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="NumeroPaginas" Type="smallint" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="MediaSet_Video">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Duracao" Type="decimal" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="AcademicoSet_Administrador">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="MediaWhislist">
-    <Key>
-      <PropertyRef Name="MediaDesejadas_Id" />
-      <PropertyRef Name="MediaWhislist_Media_Id" />
-    </Key>
-    <Property Name="MediaDesejadas_Id" Type="int" Nullable="false" />
-    <Property Name="MediaWhislist_Media_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="TransacaoMedia">
-    <Key>
-      <PropertyRef Name="TransacaoMedia_Media_Id" />
-      <PropertyRef Name="MediasTransacao_Id" />
-    </Key>
-    <Property Name="TransacaoMedia_Media_Id" Type="int" Nullable="false" />
-    <Property Name="MediasTransacao_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="AcademicoContaAcademico">
-    <End Role="Academico" Type="dbModel.Store.AcademicoSet" Multiplicity="1" />
-    <End Role="ContaAcademico" Type="dbModel.Store.ContaAcademicoSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Academico">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ContaAcademico">
-        <PropertyRef Name="AcademicoContaAcademico_ContaAcademico_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="AcademicoWhislist">
-    <End Role="Academico" Type="dbModel.Store.AcademicoSet" Multiplicity="1" />
-    <End Role="Whislist" Type="dbModel.Store.WhislistSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Academico">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Whislist">
-        <PropertyRef Name="AcademicoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="MediaAutor">
-    <End Role="Media" Type="dbModel.Store.MediaSet" Multiplicity="1" />
-    <End Role="Autor" Type="dbModel.Store.AcademicoSet_Autor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Media">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Autor">
-        <PropertyRef Name="MediaAutor_Autor_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="AcademicoMedia">
-    <End Role="Academico" Type="dbModel.Store.AcademicoSet" Multiplicity="1" />
-    <End Role="Media" Type="dbModel.Store.MediaSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Academico">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Media">
-        <PropertyRef Name="AcademicoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="TransacaoAcademico">
-    <End Role="Transacao" Type="dbModel.Store.TransacaoSet" Multiplicity="0..1" />
-    <End Role="Academico" Type="dbModel.Store.AcademicoSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Transacao">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Academico">
-        <PropertyRef Name="TransacaoAcademico_Academico_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MediaWhislist_Media">
-    <End Role="Media" Type="dbModel.Store.MediaSet" Multiplicity="1" />
-    <End Role="MediaWhislist" Type="dbModel.Store.MediaWhislist" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Media">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="MediaWhislist">
-        <PropertyRef Name="MediaDesejadas_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MediaWhislist_Whislist">
-    <End Role="MediaWhislist" Type="dbModel.Store.MediaWhislist" Multiplicity="*" />
-    <End Role="Whislist" Type="dbModel.Store.WhislistSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Whislist">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="MediaWhislist">
-        <PropertyRef Name="MediaWhislist_Media_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TransacaoMedia_Transacao">
-    <End Role="Transacao" Type="dbModel.Store.TransacaoSet" Multiplicity="1" />
-    <End Role="TransacaoMedia" Type="dbModel.Store.TransacaoMedia" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Transacao">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TransacaoMedia">
-        <PropertyRef Name="TransacaoMedia_Media_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TransacaoMedia_Media">
-    <End Role="TransacaoMedia" Type="dbModel.Store.TransacaoMedia" Multiplicity="*" />
-    <End Role="Media" Type="dbModel.Store.MediaSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Media">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TransacaoMedia">
-        <PropertyRef Name="MediasTransacao_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Autor_inherits_Academico">
-    <End Role="Academico" Type="dbModel.Store.AcademicoSet" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Autor" Type="dbModel.Store.AcademicoSet_Autor" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Academico">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Autor">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Musica_inherits_Media">
-    <End Role="Media" Type="dbModel.Store.MediaSet" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Musica" Type="dbModel.Store.MediaSet_Musica" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Media">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Musica">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Livro_inherits_Media">
-    <End Role="Media" Type="dbModel.Store.MediaSet" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Livro" Type="dbModel.Store.MediaSet_Livro" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Media">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Livro">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Video_inherits_Media">
-    <End Role="Media" Type="dbModel.Store.MediaSet" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Video" Type="dbModel.Store.MediaSet_Video" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Media">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Video">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Administrador_inherits_Autor">
-    <End Role="Autor" Type="dbModel.Store.AcademicoSet_Autor" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Administrador" Type="dbModel.Store.AcademicoSet_Administrador" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Autor">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Administrador">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+        <EntityType Name="AcademicoSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Email" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="Password" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="PrimeiroNome" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="SegundoNome" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="Ativo" Nullable="false" Type="bit" />
+          <Property Name="TransacaoAcademico_Academico_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="AcademicoSet_Administrador">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" Type="int" />
+        </EntityType>
+        <EntityType Name="AcademicoSet_Autor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" Type="int" />
+        </EntityType>
+        <EntityType Name="AlbumSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Nome" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="DataCriacao" Nullable="false" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ContaAcademicoSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Credito" Nullable="false" Type="float" />
+          <Property Name="Ativo" Nullable="false" Type="bit" />
+          <Property Name="AcademicoContaAcademico_ContaAcademico_Id" Nullable="false" Type="int" />
+        </EntityType>
+        <EntityType Name="MediaSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Nome" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="Descricao" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="Publicado" Nullable="false" Type="bit" />
+          <Property Name="Preco" Nullable="false" Precision="18" Scale="0" Type="decimal" />
+          <Property Name="Categoria" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="DataCriacao" Nullable="false" Type="datetime" />
+          <Property Name="Caminho" Type="nvarchar(max)" />
+          <Property Name="AcademicoId" Nullable="false" Type="int" />
+          <Property Name="Ativo" Nullable="false" Type="bit" />
+        </EntityType>
+        <EntityType Name="MediaSet_Livro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="NumeroPaginas" Nullable="false" Type="smallint" />
+          <Property Name="Id" Nullable="false" Type="int" />
+        </EntityType>
+        <EntityType Name="MediaSet_Musica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Duracao" Nullable="false" Type="float" />
+          <Property Name="Id" Nullable="false" Type="int" />
+        </EntityType>
+        <EntityType Name="MediaSet_Video">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Duracao" Nullable="false" Precision="18" Scale="0" Type="decimal" />
+          <Property Name="Id" Nullable="false" Type="int" />
+        </EntityType>
+        <EntityType Name="MediaWhislist">
+          <Key>
+            <PropertyRef Name="MediaDesejadas_Id" />
+            <PropertyRef Name="MediaWhislist_Media_Id" />
+          </Key>
+          <Property Name="MediaDesejadas_Id" Nullable="false" Type="int" />
+          <Property Name="MediaWhislist_Media_Id" Nullable="false" Type="int" />
+        </EntityType>
+        <EntityType Name="TransacaoMedia">
+          <Key>
+            <PropertyRef Name="TransacaoMedia_Media_Id" />
+            <PropertyRef Name="MediasTransacao_Id" />
+          </Key>
+          <Property Name="TransacaoMedia_Media_Id" Nullable="false" Type="int" />
+          <Property Name="MediasTransacao_Id" Nullable="false" Type="int" />
+        </EntityType>
+        <EntityType Name="TransacaoSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Valor" Nullable="false" Type="float" />
+          <Property Name="Ativo" Nullable="false" Type="bit" />
+        </EntityType>
+        <EntityType Name="WhislistSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Nome" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="AcademicoId" Nullable="false" Type="int" />
+          <Property Name="Ativo" Nullable="false" Type="bit" />
+        </EntityType>
+        <Association Name="FK_AcademicoContaAcademico">
+          <End Type="Self.AcademicoSet" Multiplicity="1" Role="AcademicoSet" />
+          <End Type="Self.ContaAcademicoSet" Multiplicity="*" Role="ContaAcademicoSet" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicoSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContaAcademicoSet">
+              <PropertyRef Name="AcademicoContaAcademico_ContaAcademico_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicoMedia">
+          <End Type="Self.AcademicoSet" Multiplicity="1" Role="AcademicoSet" />
+          <End Type="Self.MediaSet" Multiplicity="*" Role="MediaSet" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicoSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MediaSet">
+              <PropertyRef Name="AcademicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicoWhislist">
+          <End Type="Self.AcademicoSet" Multiplicity="1" Role="AcademicoSet" />
+          <End Type="Self.WhislistSet" Multiplicity="*" Role="WhislistSet" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicoSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WhislistSet">
+              <PropertyRef Name="AcademicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Administrador_inherits_Autor">
+          <End Type="Self.AcademicoSet_Autor" Multiplicity="1" Role="AcademicoSet_Autor">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Self.AcademicoSet_Administrador" Multiplicity="0..1" Role="AcademicoSet_Administrador" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicoSet_Autor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicoSet_Administrador">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livro_inherits_Media">
+          <End Type="Self.MediaSet" Multiplicity="1" Role="MediaSet">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Self.MediaSet_Livro" Multiplicity="0..1" Role="MediaSet_Livro" />
+          <ReferentialConstraint>
+            <Principal Role="MediaSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MediaSet_Livro">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MediaWhislist_Media">
+          <End Type="Self.MediaSet" Multiplicity="1" Role="MediaSet" />
+          <End Type="Self.MediaWhislist" Multiplicity="*" Role="MediaWhislist" />
+          <ReferentialConstraint>
+            <Principal Role="MediaSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MediaWhislist">
+              <PropertyRef Name="MediaDesejadas_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MediaWhislist_Whislist">
+          <End Type="Self.WhislistSet" Multiplicity="1" Role="WhislistSet" />
+          <End Type="Self.MediaWhislist" Multiplicity="*" Role="MediaWhislist" />
+          <ReferentialConstraint>
+            <Principal Role="WhislistSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MediaWhislist">
+              <PropertyRef Name="MediaWhislist_Media_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Musica_inherits_Media">
+          <End Type="Self.MediaSet" Multiplicity="1" Role="MediaSet">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Self.MediaSet_Musica" Multiplicity="0..1" Role="MediaSet_Musica" />
+          <ReferentialConstraint>
+            <Principal Role="MediaSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MediaSet_Musica">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransacaoAcademico">
+          <End Type="Self.TransacaoSet" Multiplicity="0..1" Role="TransacaoSet" />
+          <End Type="Self.AcademicoSet" Multiplicity="*" Role="AcademicoSet" />
+          <ReferentialConstraint>
+            <Principal Role="TransacaoSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicoSet">
+              <PropertyRef Name="TransacaoAcademico_Academico_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransacaoMedia_Media">
+          <End Type="Self.MediaSet" Multiplicity="1" Role="MediaSet" />
+          <End Type="Self.TransacaoMedia" Multiplicity="*" Role="TransacaoMedia" />
+          <ReferentialConstraint>
+            <Principal Role="MediaSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransacaoMedia">
+              <PropertyRef Name="MediasTransacao_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransacaoMedia_Transacao">
+          <End Type="Self.TransacaoSet" Multiplicity="1" Role="TransacaoSet" />
+          <End Type="Self.TransacaoMedia" Multiplicity="*" Role="TransacaoMedia" />
+          <ReferentialConstraint>
+            <Principal Role="TransacaoSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransacaoMedia">
+              <PropertyRef Name="TransacaoMedia_Media_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Video_inherits_Media">
+          <End Type="Self.MediaSet" Multiplicity="1" Role="MediaSet">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Self.MediaSet_Video" Multiplicity="0..1" Role="MediaSet_Video" />
+          <ReferentialConstraint>
+            <Principal Role="MediaSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MediaSet_Video">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbModelStoreContainer">
+          <EntitySet Name="AcademicoSet" EntityType="Self.AcademicoSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcademicoSet_Administrador" EntityType="Self.AcademicoSet_Administrador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcademicoSet_Autor" EntityType="Self.AcademicoSet_Autor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlbumSet" EntityType="Self.AlbumSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContaAcademicoSet" EntityType="Self.ContaAcademicoSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaSet" EntityType="Self.MediaSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaSet_Livro" EntityType="Self.MediaSet_Livro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaSet_Musica" EntityType="Self.MediaSet_Musica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaSet_Video" EntityType="Self.MediaSet_Video" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaWhislist" EntityType="Self.MediaWhislist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransacaoMedia" EntityType="Self.TransacaoMedia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransacaoSet" EntityType="Self.TransacaoSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WhislistSet" EntityType="Self.WhislistSet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AcademicoContaAcademico" Association="Self.FK_AcademicoContaAcademico">
+            <End EntitySet="AcademicoSet" Role="AcademicoSet" />
+            <End EntitySet="ContaAcademicoSet" Role="ContaAcademicoSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicoMedia" Association="Self.FK_AcademicoMedia">
+            <End EntitySet="AcademicoSet" Role="AcademicoSet" />
+            <End EntitySet="MediaSet" Role="MediaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicoWhislist" Association="Self.FK_AcademicoWhislist">
+            <End EntitySet="AcademicoSet" Role="AcademicoSet" />
+            <End EntitySet="WhislistSet" Role="WhislistSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Administrador_inherits_Autor" Association="Self.FK_Administrador_inherits_Autor">
+            <End EntitySet="AcademicoSet_Autor" Role="AcademicoSet_Autor" />
+            <End EntitySet="AcademicoSet_Administrador" Role="AcademicoSet_Administrador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livro_inherits_Media" Association="Self.FK_Livro_inherits_Media">
+            <End EntitySet="MediaSet" Role="MediaSet" />
+            <End EntitySet="MediaSet_Livro" Role="MediaSet_Livro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MediaWhislist_Media" Association="Self.FK_MediaWhislist_Media">
+            <End EntitySet="MediaSet" Role="MediaSet" />
+            <End EntitySet="MediaWhislist" Role="MediaWhislist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MediaWhislist_Whislist" Association="Self.FK_MediaWhislist_Whislist">
+            <End EntitySet="WhislistSet" Role="WhislistSet" />
+            <End EntitySet="MediaWhislist" Role="MediaWhislist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Musica_inherits_Media" Association="Self.FK_Musica_inherits_Media">
+            <End EntitySet="MediaSet" Role="MediaSet" />
+            <End EntitySet="MediaSet_Musica" Role="MediaSet_Musica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransacaoAcademico" Association="Self.FK_TransacaoAcademico">
+            <End EntitySet="TransacaoSet" Role="TransacaoSet" />
+            <End EntitySet="AcademicoSet" Role="AcademicoSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransacaoMedia_Media" Association="Self.FK_TransacaoMedia_Media">
+            <End EntitySet="MediaSet" Role="MediaSet" />
+            <End EntitySet="TransacaoMedia" Role="TransacaoMedia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransacaoMedia_Transacao" Association="Self.FK_TransacaoMedia_Transacao">
+            <End EntitySet="TransacaoSet" Role="TransacaoSet" />
+            <End EntitySet="TransacaoMedia" Role="TransacaoMedia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Video_inherits_Media" Association="Self.FK_Video_inherits_Media">
+            <End EntitySet="MediaSet" Role="MediaSet" />
+            <End EntitySet="MediaSet_Video" Role="MediaSet_Video" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -373,8 +342,8 @@
           <EntitySet Name="WhislistSet" EntityType="dbModel.Whislist" />
           <EntitySet Name="ContaAcademicoSet" EntityType="dbModel.ContaAcademico" />
           <AssociationSet Name="AcademicoContaAcademico" Association="dbModel.AcademicoContaAcademico">
-            <End Role="Academico" EntitySet="AcademicoSet" />
-            <End Role="ContaAcademico" EntitySet="ContaAcademicoSet" />
+            <End EntitySet="AcademicoSet" Role="Academico" />
+            <End EntitySet="ContaAcademicoSet" Role="ContaAcademico" />
           </AssociationSet>
           <AssociationSet Name="MediaWhislist" Association="dbModel.MediaWhislist">
             <End Role="Media" EntitySet="MediaSet" />
@@ -384,21 +353,17 @@
             <End Role="Academico" EntitySet="AcademicoSet" />
             <End Role="Whislist" EntitySet="WhislistSet" />
           </AssociationSet>
-          <AssociationSet Name="MediaAutor" Association="dbModel.MediaAutor">
-            <End Role="Media" EntitySet="MediaSet" />
-            <End Role="Autor" EntitySet="AcademicoSet" />
-          </AssociationSet>
           <AssociationSet Name="AcademicoMedia" Association="dbModel.AcademicoMedia">
             <End Role="Academico" EntitySet="AcademicoSet" />
             <End Role="Media" EntitySet="MediaSet" />
           </AssociationSet>
           <AssociationSet Name="TransacaoAcademico" Association="dbModel.TransacaoAcademico">
-            <End Role="Transacao" EntitySet="TransacaoSet" />
-            <End Role="Academico" EntitySet="AcademicoSet" />
+            <End EntitySet="TransacaoSet" Role="Transacao" />
+            <End EntitySet="AcademicoSet" Role="Academico" />
           </AssociationSet>
           <AssociationSet Name="TransacaoMedia" Association="dbModel.TransacaoMedia">
-            <End Role="Transacao" EntitySet="TransacaoSet" />
-            <End Role="Media" EntitySet="MediaSet" />
+            <End EntitySet="TransacaoSet" Role="Transacao" />
+            <End EntitySet="MediaSet" Role="Media" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Academico">
@@ -406,37 +371,39 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" Nullable="false" />
-          <Property Name="Password" Type="String" Nullable="false" />
-          <Property Name="PrimeiroNome" Type="String" Nullable="false" />
-          <Property Name="SegundoNome" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PrimeiroNome" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SegundoNome" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="ContaAcademico" Relationship="dbModel.AcademicoContaAcademico" FromRole="Academico" ToRole="ContaAcademico" />
           <NavigationProperty Name="WhislistDoAcademico" Relationship="dbModel.AcademicoWhislist" FromRole="Academico" ToRole="Whislist" />
           <NavigationProperty Name="MediaDoAcademico" Relationship="dbModel.AcademicoMedia" FromRole="Academico" ToRole="Media" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Media">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" />
-          <Property Name="Descricao" Type="String" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Publicado" Type="Boolean" Nullable="false" />
-          <Property Name="Preco" Type="Decimal" Nullable="false" />
-          <Property Name="Categoria" Type="String" Nullable="false" />
-          <Property Name="DataCriacao" Type="DateTime" Nullable="false" />
-          <Property Name="Caminho" Type="String" Nullable="false" />
-          <NavigationProperty Name="AutorDaMidia" Relationship="dbModel.MediaAutor" FromRole="Media" ToRole="Autor" />
+          <Property Name="Preco" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Categoria" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Caminho" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="AcademicoId" Type="Int32" Nullable="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Transacao">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="valor" Type="Double" Nullable="false" />
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Valor" Nullable="false" Type="Double" />
           <NavigationProperty Name="AcademicoDaTransacao" Relationship="dbModel.TransacaoAcademico" FromRole="Transacao" ToRole="Academico" />
           <NavigationProperty Name="MediasTransacao" Relationship="dbModel.TransacaoMedia" FromRole="Transacao" ToRole="Media" />
+          <Property Name="Ativo" Nullable="false" Type="Boolean" />
         </EntityType>
         <EntityType Name="Musica" BaseType="dbModel.Media" >
           <Property Name="Duracao" Type="Double" Nullable="false" />
@@ -445,10 +412,9 @@
           <Property Name="NumeroPaginas" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Video" BaseType="dbModel.Media" >
-          <Property Name="Duracao" Type="Decimal" Nullable="false" />
+          <Property Name="Duracao" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
-        <EntityType Name="Autor" BaseType="dbModel.Academico" >
-          <Property Name="MediaId" Type="Int32" Nullable="false" />
+        <EntityType Name="Autor" BaseType="dbModel.Academico">
         </EntityType>
         <EntityType Name="Administrador" BaseType="dbModel.Autor" >
         </EntityType>
@@ -457,28 +423,30 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" />
-          <Property Name="DataCriacao" Type="DateTime" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Whislist">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="MediaDesejadas" Relationship="dbModel.MediaWhislist" FromRole="Whislist" ToRole="Media" />
           <Property Name="AcademicoId" Type="Int32" Nullable="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ContaAcademico">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Credito" Type="Double" Nullable="false" />
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Credito" Nullable="false" Type="Double" />
+          <Property Name="Ativo" Nullable="false" Type="Boolean" />
         </EntityType>
         <Association Name="AcademicoContaAcademico">
-          <End Type="dbModel.Academico" Role="Academico" Multiplicity="1" />
-          <End Type="dbModel.ContaAcademico" Role="ContaAcademico" Multiplicity="0..1" />
+          <End Type="dbModel.Academico" Multiplicity="1" Role="Academico" />
+          <End Type="dbModel.ContaAcademico" Multiplicity="0..1" Role="ContaAcademico" />
         </Association>
         <Association Name="MediaWhislist">
           <End Type="dbModel.Media" Role="Media" Multiplicity="*" />
@@ -496,10 +464,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="MediaAutor">
-          <End Type="dbModel.Media" Role="Media" Multiplicity="1" />
-          <End Type="dbModel.Autor" Role="Autor" Multiplicity="0..1" />
-        </Association>
         <Association Name="AcademicoMedia">
           <End Type="dbModel.Academico" Role="Academico" Multiplicity="1" />
           <End Type="dbModel.Media" Role="Media" Multiplicity="*" />
@@ -513,19 +477,19 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="TransacaoAcademico">
-          <End Type="dbModel.Transacao" Role="Transacao" Multiplicity="0..1" />
-          <End Type="dbModel.Academico" Role="Academico" Multiplicity="0..1" />
+          <End Type="dbModel.Transacao" Multiplicity="0..1" Role="Transacao" />
+          <End Type="dbModel.Academico" Multiplicity="0..1" Role="Academico" />
         </Association>
         <Association Name="TransacaoMedia">
-          <End Type="dbModel.Transacao" Role="Transacao" Multiplicity="*" />
-          <End Type="dbModel.Media" Role="Media" Multiplicity="*" />
+          <End Type="dbModel.Transacao" Multiplicity="*" Role="Transacao" />
+          <End Type="dbModel.Media" Multiplicity="*" Role="Media" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities">
+  <EntityContainerMapping CdmEntityContainer="dbEntities" StorageEntityContainer="dbModelStoreContainer">
     <EntitySetMapping Name="AcademicoSet">
       <EntityTypeMapping TypeName="IsTypeOf(dbModel.Academico)">
         <MappingFragment StoreEntitySet="AcademicoSet">
@@ -534,12 +498,7 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="PrimeiroNome" ColumnName="PrimeiroNome" />
           <ScalarProperty Name="SegundoNome" ColumnName="SegundoNome" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(dbModel.Autor)">
-        <MappingFragment StoreEntitySet="AcademicoSet_Autor">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+          <ScalarProperty Name="Ativo" ColumnName="Ativo" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(dbModel.Administrador)">
@@ -547,18 +506,24 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(dbModel.Autor)">
+              <MappingFragment StoreEntitySet="AcademicoSet_Autor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MediaSet">
       <EntityTypeMapping TypeName="IsTypeOf(dbModel.Media)">
         <MappingFragment StoreEntitySet="MediaSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="Caminho" ColumnName="Caminho" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="Descricao" ColumnName="Descricao" />
           <ScalarProperty Name="Publicado" ColumnName="Publicado" />
           <ScalarProperty Name="Preco" ColumnName="Preco" />
           <ScalarProperty Name="Categoria" ColumnName="Categoria" />
           <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
-          <ScalarProperty Name="Caminho" ColumnName="Caminho" />
           <ScalarProperty Name="AcademicoId" ColumnName="AcademicoId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -585,7 +550,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(dbModel.Transacao)">
         <MappingFragment StoreEntitySet="TransacaoSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Ativo" ColumnName="Ativo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -604,6 +570,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="AcademicoId" ColumnName="AcademicoId" />
+          <ScalarProperty Name="Ativo" ColumnName="Ativo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -612,6 +579,7 @@
         <MappingFragment StoreEntitySet="ContaAcademicoSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Credito" ColumnName="Credito" />
+          <ScalarProperty Name="Ativo" ColumnName="Ativo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -629,14 +597,6 @@
       </EndProperty>
       <EndProperty Name="Whislist">
         <ScalarProperty Name="Id" ColumnName="MediaWhislist_Media_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="MediaAutor" TypeName="dbModel.MediaAutor" StoreEntitySet="AcademicoSet_Autor">
-      <EndProperty Name="Media">
-        <ScalarProperty Name="Id" ColumnName="MediaAutor_Autor_Id" />
-      </EndProperty>
-      <EndProperty Name="Autor">
-        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="TransacaoAcademico" TypeName="dbModel.TransacaoAcademico" StoreEntitySet="AcademicoSet">

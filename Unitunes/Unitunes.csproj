@@ -123,12 +123,12 @@
       <LastGenOutput>Modelos.cs</LastGenOutput>
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
-    <Content Include="Views\Login\VerifyLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -175,11 +175,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Repositorios\Academico.cs" />
-    <Compile Include="Models\Repositorios\Midia.cs" />
     <Compile Include="Models\Musica.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repositorios\Academico.cs" />
+    <Compile Include="Models\Repositorios\Midia.cs" />
     <Compile Include="Models\Transacao.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
@@ -208,6 +208,7 @@
     <Content Include="Views\Login\Principal.cshtml" />
     <Content Include="Views\Midia\Criar.cshtml" />
     <Content Include="Views\Midia\Listar.cshtml" />
+    <Content Include="Views\Midia\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
