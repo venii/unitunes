@@ -1,0 +1,1 @@
+﻿instanciar sub classes bideo,musica,livro e salvar no model Midia pois extendem esta classes

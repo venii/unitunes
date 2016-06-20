@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Selecione o novo tipo de midia.";
+}
+
+<h2>CriarNovaMidia</h2>
+@using (Html.BeginForm("CriarNovaMidia", "Midia", FormMethod.Post))
+{ 
+   @Html.Hidden("opt", "0");
+   <input type="submit" name="Submit" value="Criar Video" />
+   
+}
+
+@using (Html.BeginForm("CriarNovaMidia", "Midia", FormMethod.Post))
+{
+    @Html.Hidden("opt", "1");
+    <input type="submit" name="Submit" value="Criar Livro" />
+
+}
+
+@using (Html.BeginForm("CriarNovaMidia", "Midia", FormMethod.Post))
+{
+    @Html.Hidden("opt", "2");
+    <input type="submit" name="Submit" value="Criar Musica" />
+
+}
+
+@using (Html.BeginForm("CriarNovaMidia", "Midia", FormMethod.Post))
+{
+    @Html.Hidden("opt", "3");
+    <input type="submit" name="Submit" value="Criar PodCast" />
+
+}

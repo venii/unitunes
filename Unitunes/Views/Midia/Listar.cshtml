@@ -7,7 +7,7 @@
 <h2>Listar</h2>
 
 <p>
-    @Html.ActionLink(" Adicionar Nova midia", "Criar")
+    @Html.ActionLink(" Adicionar Nova midia", "CriarNovaMidia")
     @Html.ActionLink("Principal", "Principal","Login")
 </p>
 <table class="table">
@@ -33,7 +33,10 @@
         <th>
             @Html.DisplayNameFor(model => model.Caminho)
         </th>
-    
+        <th>
+            @Html.DisplayName("Tipo")
+        </th>
+
         <th></th>
     </tr>
 
@@ -61,9 +64,13 @@
             @Html.DisplayFor(modelItem => item.Caminho)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
-            @Html.ActionLink("Deletar", "Deletar", new { id=item.Id })
+            @item.GetType().Name
         </td>
+
+        <td>
+            @Html.ActionLink("Editar", "Editar", item.GetType().Name, new { id = item.Id }, null) |
+            @Html.ActionLink("Editar", "Deletar", item.GetType().Name, new { id = item.Id }, null) |
+</td>
     </tr>
 }
 

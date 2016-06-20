@@ -128,12 +128,14 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="TextFile1.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MidiaController.cs" />
+    <Compile Include="Controllers\Midia\VideoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,6 +191,7 @@
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\MidiaViewModel.cs" />
+    <Compile Include="Models\ViewModel\VideoViewModel.cs" />
     <Compile Include="Models\Whislist.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
@@ -209,6 +212,10 @@
     <Content Include="Views\Midia\Criar.cshtml" />
     <Content Include="Views\Midia\Listar.cshtml" />
     <Content Include="Views\Midia\Editar.cshtml" />
+    <Content Include="Views\Video\Criar.cshtml" />
+    <Content Include="Views\Video\Delete.cshtml" />
+    <Content Include="Views\Video\Edit.cshtml" />
+    <Content Include="Views\Midia\CriarNovaMidia.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

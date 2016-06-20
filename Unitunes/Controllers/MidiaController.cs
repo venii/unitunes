@@ -45,10 +45,11 @@ namespace Unitunes.Controllers
                midiaViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
                midiaViewModel.midia.Ativo = true;
                
-               var midiaRepo = Singleton<Midia>.Instance();
+               var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
                midiaRepo.Save(midiaViewModel.midia);
 
                return Redirect("/Login/Principal");
+             
            }
                 
            return View();
@@ -57,7 +58,7 @@ namespace Unitunes.Controllers
         // GET: EDITAR MIDIA
         public ActionResult Editar(int id)
         {
-            var midiaRepo = Singleton<Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
                 
             MidiaViewModel mv = new MidiaViewModel();
 
@@ -70,7 +71,7 @@ namespace Unitunes.Controllers
         [HttpPost]
         public ActionResult Editar(Unitunes.Models.ViewModel.MidiaViewModel midiaViewModel)
         {
-            var midiaRepo = Singleton<Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
 
             if (ModelState.IsValid)
             {
@@ -99,7 +100,7 @@ namespace Unitunes.Controllers
         //GET : LISTAR MIDIAS
         public ActionResult Listar()
         {
-            var midiaRepo = Singleton<Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
             //passa o model pelo view
             int id = Unitunes.Models.ModelosApp.Academico.getId();
 
@@ -107,6 +108,45 @@ namespace Unitunes.Controllers
 
 
             return View(minhasMidias);
+        }
+
+        //GET : LISTAR MIDIAS
+        public ActionResult CriarNovaMidia()
+        {
+
+            
+            return View();
+        }
+
+        //GET : LISTAR MIDIAS
+        [HttpPost]
+        public ActionResult CriarNovaMidia(int opt)
+        {
+            if (opt == 0)
+            {
+                
+                return Redirect("/Video/Criar");
+            }
+
+            if (opt == 1)
+            {
+
+                return Redirect("/Livro/Criar");
+            }
+
+            if (opt == 2)
+            {
+
+                return Redirect("/Musica/Criar");
+            }
+
+            if (opt == 3)
+            {
+
+                return Redirect("/Podcast/Criar");
+            }
+
+            return View();
         }
    }
         
