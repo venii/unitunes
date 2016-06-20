@@ -39,8 +39,8 @@
 
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+@if(Model != null){
+    foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Nome)
@@ -69,9 +69,9 @@
 
         <td>
             @Html.ActionLink("Editar", "Editar", item.GetType().Name, new { id = item.Id }, null) |
-            @Html.ActionLink("Editar", "Deletar", item.GetType().Name, new { id = item.Id }, null) |
+            @Html.ActionLink("Deletar", "Deletar", item.GetType().Name, new { id = item.Id }, null) |
 </td>
     </tr>
+    }
 }
-
 </table>

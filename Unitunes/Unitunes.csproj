@@ -213,8 +213,8 @@
     <Content Include="Views\Midia\Listar.cshtml" />
     <Content Include="Views\Midia\Editar.cshtml" />
     <Content Include="Views\Video\Criar.cshtml" />
-    <Content Include="Views\Video\Delete.cshtml" />
-    <Content Include="Views\Video\Edit.cshtml" />
+    <Content Include="Views\Video\Deletar.cshtml" />
+    <Content Include="Views\Video\Editar.cshtml" />
     <Content Include="Views\Midia\CriarNovaMidia.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

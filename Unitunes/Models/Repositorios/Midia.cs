@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.Mvc;
 using Unitunes.Models.Abstratos;
 using Unitunes.Models.Contratos;
+using Unitunes.Models.ModelosApp;
+
 
 namespace Unitunes.Models.ModelosApp 
 {
@@ -38,7 +40,7 @@ namespace Unitunes.Models.ModelosApp
             //join academico x medias
             var minhaMidia      = from m in medias
                                 join a in academico on m.AcademicoId equals a.Id
-                                where a.Id == id
+                                where a.Id == id && m.Ativo == true
                                 select m;
 
             if (minhaMidia.Count() > 0)
@@ -98,8 +100,8 @@ namespace Unitunes.Models.ModelosApp
             try
             {
 
-                
-               ctx.Entry<Media>(entity).State = System.Data.Entity.EntityState.Modified;
+
+               ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
                ctx.SaveChanges();
 
                return true;

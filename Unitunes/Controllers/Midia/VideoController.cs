@@ -62,18 +62,16 @@ namespace Unitunes.Controllers.Midia
         }
 
         // GET: Videos/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Editar(int id)
         {
-           /* if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Video video = db.MediaSet.Find(id);
-            if (video == null)
-            {
-                return HttpNotFound();
-            }*/
-            return View();
+            Unitunes.Models.ViewModel.VideoViewModel videoViewModel = new Models.ViewModel.VideoViewModel();
+            
+            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            
+            videoViewModel.midia = (Video)midiaRepo.GetById(id);
+
+
+            return View(videoViewModel);
         }
 
         // POST: Videos/Edit/5
@@ -81,41 +79,64 @@ namespace Unitunes.Controllers.Midia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Descricao,Publicado,Preco,Categoria,DataCriacao,Caminho,AcademicoId,Ativo,Duracao")] Video video)
-        {/*
+        public ActionResult Editar(Unitunes.Models.ViewModel.VideoViewModel videoViewModel)
+        {
+            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+
             if (ModelState.IsValid)
             {
-                db.Entry(video).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }*/
-            return View(video);
+                if (videoViewModel.arquivoUpload != null)
+                {
+                    if (videoViewModel.arquivoUpload.ContentLength > 0)
+                    {
+
+                        var fileName = Path.GetFileName(videoViewModel.arquivoUpload.FileName);
+                        var path = Path.Combine(Server.MapPath("~/App_Data/midias"), fileName);
+                        //salva no servidor
+                        videoViewModel.arquivoUpload.SaveAs(path);
+
+
+                        videoViewModel.midia.Caminho = path;
+
+                    }
+                }
+
+                //nao esquecer academicoID
+                videoViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
+                midiaRepo.Update(videoViewModel.midia);
+
+                return Redirect("/Midia/Listar");
+            }
+            return View(videoViewModel);
+
+
+ 
         }
 
         // GET: Videos/Delete/5
-        public ActionResult Delete(int? id)
-        {/*
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Video video = db.MediaSet.Find(id);
-            if (video == null)
-            {
-                return HttpNotFound();
-            }*/
-            return View();
+        public ActionResult Deletar(int id)
+        {
+            Unitunes.Models.ViewModel.VideoViewModel videoViewModel = new Models.ViewModel.VideoViewModel();
+
+            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+
+            videoViewModel.midia = (Video)midiaRepo.GetById(id);
+
+
+            return View(videoViewModel);
+
         }
 
         // POST: Videos/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Deletar")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {/*
-            Video video = db.MediaSet.Find(id);
-            db.MediaSet.Remove(video);
-            db.SaveChanges();*/
-            return RedirectToAction("Index");
+        public ActionResult Deletar(Unitunes.Models.ViewModel.VideoViewModel videoViewModel)
+        {
+            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            videoViewModel.midia.Ativo = false;
+
+            midiaRepo.Update(videoViewModel.midia);
+            return Redirect("/Midia/Listar");
         }
 
         protected override void Dispose(bool disposing)
