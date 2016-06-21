@@ -53,6 +53,8 @@
         <AssociationConnector Association="dbModel.AcademicoMedia" />
         <AssociationConnector Association="dbModel.TransacaoAcademico" />
         <AssociationConnector Association="dbModel.TransacaoMedia" />
+        <EntityTypeShape EntityType="dbModel.Podcast" Width="1.5" PointX="14.875" PointY="5.125" />
+        <InheritanceConnector EntityType="dbModel.Podcast" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

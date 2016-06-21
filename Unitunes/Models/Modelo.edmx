@@ -17,6 +17,7 @@
     <EntitySet Name="MediaSet_Video" EntityType="dbModel.Store.MediaSet_Video" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AcademicoSet_Autor" EntityType="dbModel.Store.AcademicoSet_Autor" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AcademicoSet_Administrador" EntityType="dbModel.Store.AcademicoSet_Administrador" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MediaSet_Podcast" EntityType="dbModel.Store.MediaSet_Podcast" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MediaWhislist" EntityType="dbModel.Store.MediaWhislist" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TransacaoMedia" EntityType="dbModel.Store.TransacaoMedia" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AcademicoContaAcademico" Association="dbModel.Store.AcademicoContaAcademico">
@@ -71,6 +72,10 @@
       <End Role="Autor" EntitySet="AcademicoSet_Autor" />
       <End Role="Administrador" EntitySet="AcademicoSet_Administrador" />
     </AssociationSet>
+    <AssociationSet Name="FK_Podcast_inherits_Media" Association="dbModel.Store.FK_Podcast_inherits_Media">
+      <End Role="Media" EntitySet="MediaSet" />
+      <End Role="Podcast" EntitySet="MediaSet_Podcast" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AcademicoSet">
     <Key>
@@ -98,6 +103,7 @@
     <Property Name="Caminho" Type="nvarchar(max)" Nullable="true" />
     <Property Name="AcademicoId" Type="int" Nullable="false" />
     <Property Name="Ativo" Type="bit" Nullable="false" />
+    <Property Name="Disponivel" Type="bit" Nullable="true" />
   </EntityType>
   <EntityType Name="TransacaoSet">
     <Key>
@@ -151,7 +157,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Duracao" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Duracao" Type="float" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AcademicoSet_Autor">
@@ -164,6 +170,13 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MediaSet_Podcast">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Duracao" Type="float" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MediaWhislist">
@@ -348,6 +361,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Podcast_inherits_Media">
+    <End Role="Media" Type="dbModel.Store.MediaSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Podcast" Type="dbModel.Store.MediaSet_Podcast" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Media">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Podcast">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -412,6 +439,7 @@
           <Property Name="Caminho" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="AcademicoId" Type="Int32" Nullable="false" />
           <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <Property Name="Disponivel" Type="Boolean" Nullable="true" />
         </EntityType>
         <EntityType Name="Transacao">
           <Key>
@@ -430,7 +458,7 @@
           <Property Name="NumeroPaginas" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Video" BaseType="dbModel.Media" >
-          <Property Name="Duracao" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Duracao" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="Autor" BaseType="dbModel.Academico">
         </EntityType>
@@ -502,6 +530,9 @@
           <End Type="dbModel.Transacao" Multiplicity="*" Role="Transacao" />
           <End Type="dbModel.Media" Multiplicity="*" Role="Media" />
         </Association>
+        <EntityType Name="Podcast" BaseType="dbModel.Media" >
+          <Property Name="Duracao" Type="Double" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -543,6 +574,7 @@
           <ScalarProperty Name="Caminho" ColumnName="Caminho" />
           <ScalarProperty Name="AcademicoId" ColumnName="AcademicoId" />
           <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+          <ScalarProperty Name="Disponivel" ColumnName="Disponivel" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(dbModel.Musica)">
@@ -559,6 +591,12 @@
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(dbModel.Video)">
         <MappingFragment StoreEntitySet="MediaSet_Video">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Duracao" ColumnName="Duracao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(dbModel.Podcast)">
+        <MappingFragment StoreEntitySet="MediaSet_Podcast">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Duracao" ColumnName="Duracao" />
         </MappingFragment>

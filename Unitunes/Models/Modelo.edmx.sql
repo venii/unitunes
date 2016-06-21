@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/18/2016 17:47:46
+-- Date Created: 06/20/2016 20:45:34
 -- Generated from EDMX file: C:\Users\Vinicius\Desktop\Unitunes_final\Unitunes\Unitunes\Models\Modelo.edmx
 -- --------------------------------------------------
 
@@ -56,6 +56,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Administrador_inherits_Autor]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AcademicoSet_Administrador] DROP CONSTRAINT [FK_Administrador_inherits_Autor];
 GO
+IF OBJECT_ID(N'[dbo].[FK_Podcast_inherits_Media]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MediaSet_Podcast] DROP CONSTRAINT [FK_Podcast_inherits_Media];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -94,6 +97,9 @@ GO
 IF OBJECT_ID(N'[dbo].[AcademicoSet_Administrador]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AcademicoSet_Administrador];
 GO
+IF OBJECT_ID(N'[dbo].[MediaSet_Podcast]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MediaSet_Podcast];
+GO
 IF OBJECT_ID(N'[dbo].[MediaWhislist]', 'U') IS NOT NULL
     DROP TABLE [dbo].[MediaWhislist];
 GO
@@ -128,7 +134,8 @@ CREATE TABLE [dbo].[MediaSet] (
     [DataCriacao] datetime  NOT NULL,
     [Caminho] nvarchar(max)  NULL,
     [AcademicoId] int  NOT NULL,
-    [Ativo] bit  NOT NULL
+    [Ativo] bit  NOT NULL,
+    [Disponivel] bit  NULL
 );
 GO
 
@@ -182,7 +189,7 @@ GO
 
 -- Creating table 'MediaSet_Video'
 CREATE TABLE [dbo].[MediaSet_Video] (
-    [Duracao] decimal(18,0)  NOT NULL,
+    [Duracao] float  NOT NULL,
     [Id] int  NOT NULL
 );
 GO
@@ -195,6 +202,13 @@ GO
 
 -- Creating table 'AcademicoSet_Administrador'
 CREATE TABLE [dbo].[AcademicoSet_Administrador] (
+    [Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'MediaSet_Podcast'
+CREATE TABLE [dbo].[MediaSet_Podcast] (
+    [Duracao] float  NOT NULL,
     [Id] int  NOT NULL
 );
 GO
@@ -280,6 +294,12 @@ GO
 -- Creating primary key on [Id] in table 'AcademicoSet_Administrador'
 ALTER TABLE [dbo].[AcademicoSet_Administrador]
 ADD CONSTRAINT [PK_AcademicoSet_Administrador]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'MediaSet_Podcast'
+ALTER TABLE [dbo].[MediaSet_Podcast]
+ADD CONSTRAINT [PK_MediaSet_Podcast]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -448,6 +468,15 @@ ALTER TABLE [dbo].[AcademicoSet_Administrador]
 ADD CONSTRAINT [FK_Administrador_inherits_Autor]
     FOREIGN KEY ([Id])
     REFERENCES [dbo].[AcademicoSet_Autor]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Id] in table 'MediaSet_Podcast'
+ALTER TABLE [dbo].[MediaSet_Podcast]
+ADD CONSTRAINT [FK_Podcast_inherits_Media]
+    FOREIGN KEY ([Id])
+    REFERENCES [dbo].[MediaSet]
         ([Id])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO

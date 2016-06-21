@@ -24,5 +24,6 @@ namespace Unitunes.Models
         public string Caminho { get; set; }
         public int AcademicoId { get; set; }
         public bool Ativo { get; set; }
+        public Nullable<bool> Disponivel { get; set; }
     }
 }

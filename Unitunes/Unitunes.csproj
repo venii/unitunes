@@ -135,6 +135,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MidiaController.cs" />
+    <Compile Include="Controllers\Midia\PodcastController.cs" />
     <Compile Include="Controllers\Midia\VideoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -180,6 +181,9 @@
     <Compile Include="Models\Musica.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Podcast.cs">
+      <DependentUpon>Modelos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Repositorios\Academico.cs" />
     <Compile Include="Models\Repositorios\Midia.cs" />
     <Compile Include="Models\Transacao.cs">
@@ -191,6 +195,9 @@
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\MidiaViewModel.cs" />
+    <Compile Include="Models\ViewModel\LivroViewModel.cs" />
+    <Compile Include="Models\ViewModel\PodcastViewModel.cs" />
+    <Compile Include="Models\ViewModel\MusicaViewModel.cs" />
     <Compile Include="Models\ViewModel\VideoViewModel.cs" />
     <Compile Include="Models\Whislist.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
@@ -216,6 +223,9 @@
     <Content Include="Views\Video\Deletar.cshtml" />
     <Content Include="Views\Video\Editar.cshtml" />
     <Content Include="Views\Midia\CriarNovaMidia.cshtml" />
+    <Content Include="Views\Podcast\Criar.cshtml" />
+    <Content Include="Views\Podcast\Deletar.cshtml" />
+    <Content Include="Views\Podcast\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

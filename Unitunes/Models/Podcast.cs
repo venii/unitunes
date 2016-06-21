@@ -12,7 +12,7 @@ namespace Unitunes.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Video : Media
+    public partial class Podcast : Media
     {
         public double Duracao { get; set; }
     }
