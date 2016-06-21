@@ -129,7 +129,7 @@ namespace Unitunes.Controllers.Midia
         }
 
         // POST: Videos/Delete/5
-        [HttpPost, ActionName("Deletar")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Deletar(Unitunes.Models.ViewModel.PodcastViewModel podcastViewModel)
         {

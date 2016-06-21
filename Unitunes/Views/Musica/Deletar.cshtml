@@ -1,4 +1,4 @@
-﻿@model Unitunes.Models.ViewModel.PodcastViewModel
+﻿@model Unitunes.Models.ViewModel.MusicaViewModel
 
 @{
     ViewBag.Title = "Deletar ";
@@ -9,7 +9,7 @@
 
 <h2>Criar</h2>
 
-@using (Html.BeginForm("Deletar", "Podcast", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Deletar", "Musica", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 

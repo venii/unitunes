@@ -12,7 +12,7 @@ using Unitunes.Models.Abstratos;
 
 namespace Unitunes.Controllers.Midia
 {
-    public class VideoController : Controller
+    public class MusicaController : Controller
     {
         private dbEntities db = new dbEntities();
 
@@ -28,50 +28,50 @@ namespace Unitunes.Controllers.Midia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Criar(Unitunes.Models.ViewModel.VideoViewModel videoViewModel)
+        public ActionResult Criar(Unitunes.Models.ViewModel.MusicaViewModel musicaViewModel)
         {
             if (ModelState.IsValid)
             {
-                if (videoViewModel.arquivoUpload != null)
+                if (musicaViewModel.arquivoUpload != null)
                 {
-                    if (videoViewModel.arquivoUpload.ContentLength > 0)
+                    if (musicaViewModel.arquivoUpload.ContentLength > 0)
                     {
 
-                        var fileName = Path.GetFileName(videoViewModel.arquivoUpload.FileName);
+                        var fileName = Path.GetFileName(musicaViewModel.arquivoUpload.FileName);
                         var path = Path.Combine(Server.MapPath("~/App_Data/midias"), fileName);
                         //salva no servidor
-                        videoViewModel.arquivoUpload.SaveAs(path);
+                        musicaViewModel.arquivoUpload.SaveAs(path);
 
-                        videoViewModel.midia.Caminho = path;
+                        musicaViewModel.midia.Caminho = path;
                         //relaciona o id do acadamico na sessao e relaciona na media
 
                     }
 
                 }
 
-                videoViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
-                videoViewModel.midia.Ativo = true;
+                musicaViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
+                musicaViewModel.midia.Ativo = true;
 
                 var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
-                midiaRepo.Save(videoViewModel.midia);
+                midiaRepo.Save(musicaViewModel.midia);
 
                 return Redirect("/Midia/Listar");
             }
 
-            return View(videoViewModel);
+            return View(musicaViewModel);
         }
 
         // GET: Videos/Edit/5
         public ActionResult Editar(int id)
         {
-            Unitunes.Models.ViewModel.VideoViewModel videoViewModel = new Models.ViewModel.VideoViewModel();
+            Unitunes.Models.ViewModel.MusicaViewModel musicaViewModel = new Models.ViewModel.MusicaViewModel();
             
             var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
-            
-            videoViewModel.midia = (Video)midiaRepo.GetById(id);
+
+            musicaViewModel.midia = (Musica)midiaRepo.GetById(id);
 
 
-            return View(videoViewModel);
+            return View(musicaViewModel);
         }
 
         // POST: Videos/Edit/5
@@ -79,36 +79,36 @@ namespace Unitunes.Controllers.Midia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(Unitunes.Models.ViewModel.VideoViewModel videoViewModel)
+        public ActionResult Editar(Unitunes.Models.ViewModel.MusicaViewModel musicaViewModel)
         {
             var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
 
             if (ModelState.IsValid)
             {
-                if (videoViewModel.arquivoUpload != null)
+                if (musicaViewModel.arquivoUpload != null)
                 {
-                    if (videoViewModel.arquivoUpload.ContentLength > 0)
+                    if (musicaViewModel.arquivoUpload.ContentLength > 0)
                     {
 
-                        var fileName = Path.GetFileName(videoViewModel.arquivoUpload.FileName);
+                        var fileName = Path.GetFileName(musicaViewModel.arquivoUpload.FileName);
                         var path = Path.Combine(Server.MapPath("~/App_Data/midias"), fileName);
                         //salva no servidor
-                        videoViewModel.arquivoUpload.SaveAs(path);
+                        musicaViewModel.arquivoUpload.SaveAs(path);
 
 
-                        videoViewModel.midia.Caminho = path;
+                        musicaViewModel.midia.Caminho = path;
 
                     }
                 }
 
                 //nao esquecer academicoID
-                videoViewModel.midia.Ativo = true;
-                videoViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
-                midiaRepo.Update(videoViewModel.midia);
+                musicaViewModel.midia.Ativo = true;
+                musicaViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
+                midiaRepo.Update(musicaViewModel.midia);
 
                 return Redirect("/Midia/Listar");
             }
-            return View(videoViewModel);
+            return View(musicaViewModel);
 
 
  
@@ -117,26 +117,26 @@ namespace Unitunes.Controllers.Midia
         // GET: Videos/Delete/5
         public ActionResult Deletar(int id)
         {
-            Unitunes.Models.ViewModel.VideoViewModel videoViewModel = new Models.ViewModel.VideoViewModel();
+            Unitunes.Models.ViewModel.MusicaViewModel musicaViewModel = new Models.ViewModel.MusicaViewModel();
 
             var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
 
-            videoViewModel.midia = (Video)midiaRepo.GetById(id);
+            musicaViewModel.midia = (Musica)midiaRepo.GetById(id);
 
 
-            return View(videoViewModel);
+            return View(musicaViewModel);
 
         }
 
         // POST: Videos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Deletar(Unitunes.Models.ViewModel.VideoViewModel videoViewModel)
+        public ActionResult Deletar(Unitunes.Models.ViewModel.MusicaViewModel musicaViewModel)
         {
             var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
-            videoViewModel.midia.Ativo = false;
+            musicaViewModel.midia.Ativo = false;
 
-            midiaRepo.Update(videoViewModel.midia);
+            midiaRepo.Update(musicaViewModel.midia);
             return Redirect("/Midia/Listar");
         }
 

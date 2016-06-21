@@ -1,7 +1,7 @@
-﻿@model Unitunes.Models.ViewModel.PodcastViewModel
+﻿@model Unitunes.Models.ViewModel.MusicaViewModel
 
 @{
-    ViewBag.Title = "Deletar ";
+    ViewBag.Title = "Editar ";
 
 }
 
@@ -9,7 +9,7 @@
 
 <h2>Criar</h2>
 
-@using (Html.BeginForm("Deletar", "Podcast", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Editar", "Musica", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -19,12 +19,11 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         @Html.HiddenFor(Model => Model.midia.Id)
-        @Html.HiddenFor(Model => Model.midia.AcademicoId)
 
         <div class="form-group">
             @Html.LabelFor(Model => Model.midia.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(Model => Model.midia.Nome, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(Model => Model.midia.Nome, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(Model => Model.midia.Nome, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -32,7 +31,7 @@
         <div class="form-group">
             @Html.LabelFor(Model => Model.midia.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(Model => Model.midia.Descricao, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(Model => Model.midia.Descricao, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(Model => Model.midia.Descricao, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -40,7 +39,7 @@
         <div class="form-group">
             @Html.LabelFor(Model => Model.midia.Publicado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(Model => Model.midia.Publicado, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(Model => Model.midia.Publicado, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(Model => Model.midia.Publicado, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -48,7 +47,7 @@
         <div class="form-group">
             @Html.LabelFor(Model => Model.midia.Preco, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(Model => Model.midia.Preco, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(Model => Model.midia.Preco, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(Model => Model.midia.Preco, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,7 +55,7 @@
         <div class="form-group">
             @Html.LabelFor(Model => Model.midia.Categoria, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(Model => Model.midia.Categoria, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(Model => Model.midia.Categoria, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(Model => Model.midia.Categoria, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -64,7 +63,7 @@
         <div class="form-group">
             @Html.LabelFor(Model => Model.midia.DataCriacao, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(Model => Model.midia.DataCriacao, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(Model => Model.midia.DataCriacao, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(Model => Model.midia.DataCriacao, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -73,7 +72,7 @@
             @Html.Label("Arquivo de Upload", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
-                <input type="file" name="arquivoUpload" disabled />
+                <input type="file" name="arquivoUpload" />
                 @Html.ValidationMessageFor(Model => Model.arquivoUpload, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -81,7 +80,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.midia.Duracao, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.midia.Duracao, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.midia.Duracao, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.midia.Duracao, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -89,7 +88,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Deletar" class="btn btn-default" />
+                <input type="submit" value="Editar" class="btn btn-default" />
             </div>
         </div>
     </div>

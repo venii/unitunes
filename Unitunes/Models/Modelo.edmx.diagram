@@ -18,7 +18,7 @@
         <InheritanceConnector EntityType="dbModel.Autor" />
         <EntityTypeShape EntityType="dbModel.Administrador" Width="1.5" PointX="1.875" PointY="7.5" />
         <InheritanceConnector EntityType="dbModel.Administrador" />
-        <EntityTypeShape EntityType="dbModel.Album" Width="1.5" PointX="5" PointY="5.25" />
+        <EntityTypeShape EntityType="dbModel.Album" Width="1.5" PointX="5.375" PointY="4.375" />
         <EntityTypeShape EntityType="dbModel.Whislist" Width="1.5" PointX="7.5" PointY="0.5" />
         <EntityTypeShape EntityType="dbModel.ContaAcademico" PointX="6.375" PointY="7.75" Width="1.5" />
         <EntityTypeShape EntityType="dbModel.AcademicoSet" Width="1.5" PointX="4.375" PointY="14" />

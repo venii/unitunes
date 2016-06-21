@@ -135,6 +135,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MidiaController.cs" />
+    <Compile Include="Controllers\Midia\MusicaController.cs" />
     <Compile Include="Controllers\Midia\PodcastController.cs" />
     <Compile Include="Controllers\Midia\VideoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -226,6 +227,9 @@
     <Content Include="Views\Podcast\Criar.cshtml" />
     <Content Include="Views\Podcast\Deletar.cshtml" />
     <Content Include="Views\Podcast\Editar.cshtml" />
+    <Content Include="Views\Musica\Criar.cshtml" />
+    <Content Include="Views\Musica\Deletar.cshtml" />
+    <Content Include="Views\Musica\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
