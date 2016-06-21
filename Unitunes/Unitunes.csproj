@@ -218,9 +218,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Login\Registrar.cshtml" />
     <Content Include="Views\Login\Principal.cshtml" />
-    <Content Include="Views\Midia\Criar.cshtml" />
     <Content Include="Views\Midia\Listar.cshtml" />
-    <Content Include="Views\Midia\Editar.cshtml" />
     <Content Include="Views\Video\Criar.cshtml" />
     <Content Include="Views\Video\Deletar.cshtml" />
     <Content Include="Views\Video\Editar.cshtml" />

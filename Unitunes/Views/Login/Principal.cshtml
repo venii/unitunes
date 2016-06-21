@@ -1,21 +1,37 @@
 ﻿@model IEnumerable<Unitunes.Models.Media>
 
 @{
-    ViewBag.Title = "Action";
+    ViewBag.Title = "Listar";
 }
 
-<h2>Action</h2>
+<h2>Listar</h2>
 
 <p>
-    Nome : @ViewBag.nome   
-
-    @Html.ActionLink("Adicionar Nova midia", "CriarNovaMidia", "Midia")
-
-    @Html.ActionLink("Minhas midias", "Listar", "Midia")
-
-    @Html.ActionLink("Logout", "Logout","Login")
+    @Html.ActionLink(" Adicionar Nova midia", "CriarNovaMidia")
+    @Html.ActionLink("Principal", "Principal", "Login")
 </p>
-@if(Model.Count() > 0){
+
+
+@using (Html.BeginForm("Editar", "Musica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Media</h4>
+        <hr />
+        <div class="form-group">
+
+            
+            <div class="col-md-offset-2 col-md-10">
+                <input type="text" name="nome" />
+                <input type="submit" value="Buscar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+}
+
+
 <table class="table">
     <tr>
         <th>
@@ -36,43 +52,50 @@
         <th>
             @Html.DisplayNameFor(model => model.DataCriacao)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Caminho)
+        </th>
+        <th>
+            @Html.DisplayName("Tipo")
+        </th>
+
         <th></th>
     </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Publicado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Caminho)
+                </td>
+                <td>
+                    @item.GetType().Name
+                </td>
 
-
-    
-    foreach (var item in Model) {
-        <tr>
-            <td>
-                Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                Html.DisplayFor(modelItem => item.Publicado)
-            </td>
-            <td>
-                Html.DisplayFor(modelItem => item.Preco)
-            </td>
-            <td>
-                Html.DisplayFor(modelItem => item.Categoria)
-            </td>
-            <td>
-                Html.DisplayFor(modelItem => item.DataCriacao)
-            </td>
-            <td>
-                Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", item.GetType().Name, new { id = item.Id }, null) |
+                    @Html.ActionLink("Deletar", "Deletar", item.GetType().Name, new { id = item.Id }, null) |
+                </td>
+            </tr>
+        }
     }
-
-
 </table>
-}
-else
-{
-    <span>Não há midias diponiveis</span>
-}

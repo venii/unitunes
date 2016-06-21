@@ -107,6 +107,16 @@ namespace Unitunes.Controllers
             IEnumerable<Unitunes.Models.Media> media = new List<Media>();
             return View(media);
         }
-        
+
+        [Authorize]
+        [HttpPost]    
+        public ActionResult Principal(string nome)
+        {
+            ViewBag.nome = Unitunes.Models.ModelosApp.Academico.getIdNome();
+            //passa o model pelo view
+            IEnumerable<Unitunes.Models.Media> media = new List<Media>();
+            return View(media);
+        }
+ 
     }
 }
