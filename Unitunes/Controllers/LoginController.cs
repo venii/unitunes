@@ -104,16 +104,46 @@ namespace Unitunes.Controllers
         {
             ViewBag.nome = Unitunes.Models.ModelosApp.Academico.getIdNome();
             //passa o model pelo view
+
+            //listar tipos
+            // nome
+            //
+
             IEnumerable<Unitunes.Models.Media> media = new List<Media>();
             return View(media);
         }
 
         [Authorize]
         [HttpPost]    
-        public ActionResult Principal(string nome)
+        public ActionResult Principal(string tipo,string nome)
         {
             ViewBag.nome = Unitunes.Models.ModelosApp.Academico.getIdNome();
-            //passa o model pelo view
+            var ctx = new dbEntities();
+
+            var medias = ctx.MediaSet;
+            var academico = ctx.AcademicoSet;
+            IQueryable<Media> resultado = null;
+            switch (tipo)
+            {
+                case "Musica":
+                      resultado = from m in medias
+                                    join a in academico on m.AcademicoId equals a.Id
+                                    where m.Nome.Contains("%/" + nome + "/%") && m.Ativo == true && m is Musica
+                                    select new {Medias = m, Academico = a };
+                    break;
+                case "Video":
+                     resultado = from m in medias
+                                    join a in academico on m.AcademicoId equals a.Id
+                                    where m.Nome.Contains("%/" + nome + "/%") && m.Ativo == true && m is Musica
+                                    select new { Medias = m, Academico = a };
+                    break;
+                case "Podcast":
+                    break;
+                case "Livro":
+                    break;
+            }
+            
+            
             IEnumerable<Unitunes.Models.Media> media = new List<Media>();
             return View(media);
         }

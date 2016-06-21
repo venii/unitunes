@@ -12,7 +12,7 @@
 </p>
 
 
-@using (Html.BeginForm("Editar", "Musica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Principal", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -23,6 +23,33 @@
 
             
             <div class="col-md-offset-2 col-md-10">
+                
+                @{
+                    List<SelectListItem> listItems = new List<SelectListItem>();
+                    listItems.Add(new SelectListItem
+                         {
+                             Text = "Livro",
+                             Value = "Livro"
+                         });
+                    listItems.Add(new SelectListItem
+                         {
+                             Text = "Muscica",
+                             Value = "Musica",
+                             Selected = true
+                         });
+                    listItems.Add(new SelectListItem
+                         {
+                             Text = "Podcast",
+                             Value = "Podcast"
+                         });
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "Video",
+                        Value = "Video"
+                    });
+                }
+
+                @Html.DropDownList("tipo", listItems, "-- Selecione --")
                 <input type="text" name="nome" />
                 <input type="submit" value="Buscar" class="btn btn-default" />
             </div>
