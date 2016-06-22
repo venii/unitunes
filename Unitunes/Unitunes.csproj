@@ -196,6 +196,7 @@
     <Compile Include="Models\Video.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\PrincipalViewModel.cs" />
     <Compile Include="Models\ViewModel\MidiaViewModel.cs" />
     <Compile Include="Models\ViewModel\LivroViewModel.cs" />
     <Compile Include="Models\ViewModel\PodcastViewModel.cs" />

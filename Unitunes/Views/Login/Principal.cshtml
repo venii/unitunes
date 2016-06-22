@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Unitunes.Models.Media>
+﻿@model IEnumerable<Unitunes.Models.ViewModel.PrincipalViewModel>
 
 @{
     ViewBag.Title = "Listar";
@@ -7,8 +7,9 @@
 <h2>Listar</h2>
 
 <p>
-    @Html.ActionLink(" Adicionar Nova midia", "CriarNovaMidia")
-    @Html.ActionLink("Principal", "Principal", "Login")
+    @Html.ActionLink(" Adicionar Nova midia", "CriarNovaMidia","Midia")
+    @Html.ActionLink(" Minhas midias", "Listar", "Midia")
+    @Html.ActionLink(" Principal", "Principal", "Login")
 </p>
 
 
@@ -62,30 +63,32 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.midia.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descricao)
+            @Html.DisplayNameFor(model => model.midia.Descricao)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Publicado)
+            @Html.DisplayNameFor(model => model.midia.Publicado)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Preco)
+            @Html.DisplayNameFor(model => model.midia.Preco)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Categoria)
+            @Html.DisplayNameFor(model => model.midia.Categoria)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DataCriacao)
+            @Html.DisplayNameFor(model => model.midia.DataCriacao)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Caminho)
+            @Html.DisplayNameFor(model => model.midia.Caminho)
         </th>
         <th>
             @Html.DisplayName("Tipo")
         </th>
-
+        <th>
+           Autor
+        </th>
         <th></th>
     </tr>
     @if (Model != null)
@@ -94,33 +97,36 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
+                    @Html.DisplayFor(modelItem => item.midia.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
+                    @Html.DisplayFor(modelItem => item.midia.Descricao)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Publicado)
+                    @Html.DisplayFor(modelItem => item.midia.Publicado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Preco)
+                    @Html.DisplayFor(modelItem => item.midia.Preco)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Categoria)
+                    @Html.DisplayFor(modelItem => item.midia.Categoria)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                    @Html.DisplayFor(modelItem => item.midia.DataCriacao)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Caminho)
+                    @Html.DisplayFor(modelItem => item.midia.Caminho)
                 </td>
                 <td>
-                    @item.GetType().Name
+                    @item.midia.GetType().Name
+                </td>
+                <td>
+                    @item.academico.PrimeiroNome
                 </td>
 
                 <td>
-                    @Html.ActionLink("Editar", "Editar", item.GetType().Name, new { id = item.Id }, null) |
-                    @Html.ActionLink("Deletar", "Deletar", item.GetType().Name, new { id = item.Id }, null) |
+                    @Html.ActionLink("Editar", "Editar", item.GetType().Name, new { id = item.midia.Id }, null) |
+                    
                 </td>
             </tr>
         }

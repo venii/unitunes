@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Unitunes.Models;
+using Unitunes.Models.ViewModel;
 
 namespace Unitunes.Controllers
 {
@@ -109,8 +111,8 @@ namespace Unitunes.Controllers
             // nome
             //
 
-            IEnumerable<Unitunes.Models.Media> media = new List<Media>();
-            return View(media);
+            var resultado = (IEnumerable<PrincipalViewModel>)null;
+            return View(resultado);
         }
 
         [Authorize]
@@ -122,30 +124,40 @@ namespace Unitunes.Controllers
 
             var medias = ctx.MediaSet;
             var academico = ctx.AcademicoSet;
-            IQueryable<Media> resultado = null;
+            var resultado = (IEnumerable<PrincipalViewModel>)null;
+
             switch (tipo)
             {
                 case "Musica":
-                      resultado = from m in medias
+                    resultado =     (from m in medias
                                     join a in academico on m.AcademicoId equals a.Id
                                     where m.Nome.Contains("%/" + nome + "/%") && m.Ativo == true && m is Musica
-                                    select new {Medias = m, Academico = a };
+                                     select new PrincipalViewModel { midia = (Musica)m, academico = (Academico)a }).AsEnumerable();
+
                     break;
                 case "Video":
-                     resultado = from m in medias
+                    resultado = (from m in medias
                                     join a in academico on m.AcademicoId equals a.Id
-                                    where m.Nome.Contains("%/" + nome + "/%") && m.Ativo == true && m is Musica
-                                    select new { Medias = m, Academico = a };
+                                    where m.Nome.Contains("%/" + nome + "/%") && m.Ativo == true && m is Video
+                                 select new PrincipalViewModel { midia = (Video)m, academico = (Academico)a }).AsEnumerable();
                     break;
                 case "Podcast":
+                    resultado = (from m in medias
+                                join a in academico on m.AcademicoId equals a.Id
+                                where m.Nome.Contains("%/" + nome + "/%") && m.Ativo == true && m is Podcast
+                                 select new PrincipalViewModel { midia = (Podcast)m, academico = (Academico)a }).AsEnumerable();
                     break;
                 case "Livro":
+                    resultado = (from m in medias
+                                join a in academico on m.AcademicoId equals a.Id
+                                where m.Nome.Contains("%/" + nome + "/%") && m.Ativo == true && m is Livro
+                                select new PrincipalViewModel { midia = (Livro)m, academico = (Academico)a }).AsEnumerable();
                     break;
             }
+
+            return View(resultado);
+
             
-            
-            IEnumerable<Unitunes.Models.Media> media = new List<Media>();
-            return View(media);
         }
  
     }
