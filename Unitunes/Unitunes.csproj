@@ -233,6 +233,10 @@
     <Content Include="Views\Livro\Criar.cshtml" />
     <Content Include="Views\Livro\Deletar.cshtml" />
     <Content Include="Views\Livro\Editar.cshtml" />
+    <Content Include="Views\Livro\Visualizar.cshtml" />
+    <Content Include="Views\Musica\Visualizar.cshtml" />
+    <Content Include="Views\Podcast\Visualizar.cshtml" />
+    <Content Include="Views\Video\Visualizar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

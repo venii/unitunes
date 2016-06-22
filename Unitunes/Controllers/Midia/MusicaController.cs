@@ -114,6 +114,19 @@ namespace Unitunes.Controllers.Midia
  
         }
 
+        public ActionResult Visualizar(int id)
+        {
+            Unitunes.Models.ViewModel.MusicaViewModel musicaViewModel = new Models.ViewModel.MusicaViewModel();
+
+            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+
+            musicaViewModel.midia = (Musica)midiaRepo.GetById(id);
+
+
+            return View(musicaViewModel);
+
+        }
+
         // GET: Videos/Delete/5
         public ActionResult Deletar(int id)
         {
