@@ -131,26 +131,26 @@ namespace Unitunes.Controllers
                 case "Musica":
                     resultado =     (from m in medias
                                     join a in academico on m.AcademicoId equals a.Id
-                                    where m.Nome.Contains("%/" + nome + "/%") && m.Ativo == true && m is Musica
+                                    where m.Nome.Contains(nome) && m.Ativo == true && m is Musica
                                      select new PrincipalViewModel { midia = m, academico = (Academico)a }).AsEnumerable();
 
                     break;
                 case "Video":
                     resultado = (from m in medias
                                     join a in academico on m.AcademicoId equals a.Id
-                                    where m.Nome.Contains("%/" + nome + "/%") && m.Ativo == true && m is Video
+                                    where m.Nome.Contains(nome) && m.Ativo == true && m is Video
                                  select new PrincipalViewModel { midia = m, academico = (Academico)a }).AsEnumerable();
                     break;
                 case "Podcast":
                     resultado = (from m in medias
                                 join a in academico on m.AcademicoId equals a.Id
-                                where m.Nome.Contains("%/" + nome + "/%") && m.Ativo == true && m is Podcast
+                                where m.Nome.Contains(nome) && m.Ativo == true && m is Podcast
                                  select new PrincipalViewModel { midia = m, academico = (Academico)a }).AsEnumerable();
                     break;
                 case "Livro":
                     resultado = (from m in medias
                                 join a in academico on m.AcademicoId equals a.Id
-                                where m.Nome.Contains("%/" + nome + "/%") && m.Ativo == true && m is Livro
+                                where m.Nome.Contains(nome) && m.Ativo == true && m is Livro
                                 select new PrincipalViewModel { midia = m, academico = (Academico)a }).AsEnumerable();
                     break;
             }
