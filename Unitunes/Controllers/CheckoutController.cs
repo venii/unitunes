@@ -24,12 +24,12 @@ namespace Unitunes.Controllers
                 var medias = ctx.MediaSet;
                 var academico = ctx.AcademicoSet;
                 //like usando arraylistaid e contains d media iD
-                var resultado = (from m in medias
+                var resultado = from m in medias
                                  
                                  where arrayListaId.Contains(m.Id) && m.Ativo == true
-                                 select m);
+                                 select m;
 
-                return View((IEnumerable<Unitunes.Models.Media>)resultado);
+                return View(resultado);
             }
             return View();
         }
