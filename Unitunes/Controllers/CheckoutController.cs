@@ -98,6 +98,10 @@ namespace Unitunes.Controllers
                     var novoCredito = credito - total;
                     Unitunes.Models.Servicos.Academico.setSaldo(idAcademico,novoCredito);
                     
+                    //add 15% ao admin total
+                    var novoCreditoAdmin = Unitunes.Models.Servicos.Academico.getSaldo(1)+((total * 15) / 100);
+                    Unitunes.Models.Servicos.Academico.setSaldo(1, novoCreditoAdmin);
+
                     ViewBag.credito = novoCredito;
                    
                     
@@ -115,7 +119,7 @@ namespace Unitunes.Controllers
                     ctx.SaveChanges();
                     //da 15% pro admin e o resto pro autor
 
-
+                    Checkout.clearCheckout();
                 }
                 else
                 {

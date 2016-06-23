@@ -15,6 +15,10 @@
     @Html.ActionLink(" Logout", "Logout", "Login")|
     Creditos: @ViewBag.credito
     
+    @if (User.IsInRole("Administrador"))
+    {
+         @Html.ActionLink("| Adicionar Creditos", "AdicionaCredito", "Transacao")
+    }
 
 </p>
 

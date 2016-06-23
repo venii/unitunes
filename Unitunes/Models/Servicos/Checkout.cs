@@ -33,5 +33,10 @@ namespace Unitunes.Models.Servicos
 
             return (List<int>)HttpContext.Current.Session["medias_selecionadas"];
         }
+
+        public static void clearCheckout()
+        {
+            HttpContext.Current.Session["medias_selecionadas"] = null;
+        }
     }
 }

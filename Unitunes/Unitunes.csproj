@@ -247,6 +247,7 @@
     <Content Include="Views\Transacao\Details.cshtml" />
     <Content Include="Views\Transacao\Edit.cshtml" />
     <Content Include="Views\Transacao\Index.cshtml" />
+    <Content Include="Views\Transacao\AdicionaCredito.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

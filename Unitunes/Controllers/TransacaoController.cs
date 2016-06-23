@@ -11,6 +11,7 @@ using Unitunes.Models;
 
 namespace Unitunes.Controllers
 {
+    [Authorize]
     public class TransacaoController : Controller
     {
         private dbEntities db = new dbEntities();
@@ -29,11 +30,17 @@ namespace Unitunes.Controllers
             var resultado = db.TransacaoSet.Where(t => t.AcademicoDaTransacao.Id == idAcademico).First();
             if (resultado != null)
             {
-                var caminho = resultado.MediasTransacao.Where(m => m.Id == idMedia).First();
+                try { 
+                    var caminho = resultado.MediasTransacao.Where(m => m.Id == idMedia).First();
                 
-                byte[] fileBytes = System.IO.File.ReadAllBytes(@caminho.Caminho);
-                string fileName = Path.GetFileNameWithoutExtension(@caminho.Caminho);
-                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                    byte[] fileBytes = System.IO.File.ReadAllBytes(@caminho.Caminho);
+                    string fileName = Path.GetFileNameWithoutExtension(@caminho.Caminho);
+                    return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
 
 
@@ -68,85 +75,40 @@ namespace Unitunes.Controllers
             return View(transacao);
         }
 
-        // GET: Transacao/Create
-        public ActionResult Create()
+
+
+        // Adiciona credito / apenas admin
+        [Authorize(Roles="Administrador")]
+        public ActionResult AdicionaCredito(int? id)
         {
+            var academicos = db.AcademicoSet;
+            // pega obj para referencia a nova transacao
+            ViewBag.academicos = academicos.ToList();
             return View();
         }
 
-        // POST: Transacao/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Adiciona credito / apenas admin
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Valor,Ativo")] Transacao transacao)
+        public ActionResult AdicionaCredito(double credito,int academico)
         {
-            if (ModelState.IsValid)
-            {
-                db.TransacaoSet.Add(transacao);
+            try { 
+                var contas = db.ContaAcademicoSet;
+
+                var conta = contas.Find(academico);
+                conta.Credito = credito;
+
+                db.Entry(conta).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
+            catch (Exception)
+            {
 
-            return View(transacao);
+            }
+            return Redirect("/Login/Principal");
         }
 
-        // GET: Transacao/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Transacao transacao = db.TransacaoSet.Find(id);
-            if (transacao == null)
-            {
-                return HttpNotFound();
-            }
-            return View(transacao);
-        }
-
-        // POST: Transacao/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Valor,Ativo")] Transacao transacao)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(transacao).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(transacao);
-        }
-
-        // GET: Transacao/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Transacao transacao = db.TransacaoSet.Find(id);
-            if (transacao == null)
-            {
-                return HttpNotFound();
-            }
-            return View(transacao);
-        }
-
-        // POST: Transacao/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Transacao transacao = db.TransacaoSet.Find(id);
-            db.TransacaoSet.Remove(transacao);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        
 
         protected override void Dispose(bool disposing)
         {
