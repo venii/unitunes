@@ -73,9 +73,9 @@ else
     </tr>
 }
 </table>
-Total de creditos das Medias: @totalPreco <br />
+Total de creditos das Medias: @totalPreco <br /> Seus credito @ViewBag.credito<br />
 
-@Html.Raw(@Html.ValidationMessage("error")) <br/> <br />
+@Html.Raw(@Html.ValidationMessage("error")) <br/> 
 
 <form action="/Checkout/Finalizar" method="POST">
 

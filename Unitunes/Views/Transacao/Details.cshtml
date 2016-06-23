@@ -1,0 +1,64 @@
+﻿@model Unitunes.Models.Transacao
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes da transacao @Model.Id</h2>
+
+<div>
+    <h4>Transacao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        
+
+    </dl>
+
+
+    <table class="table">
+        <tr>
+            <th>
+                Media
+            </th>
+            <th>
+                Tipo
+            </th>
+            <th>
+               Preco
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.MediasTransacao)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @item.GetType().Name
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preco)
+                </td>
+                <td>
+                    @Html.ActionLink("Download", "Download", new { id = item.Id }) 
+                   
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<p>
+    
+    @Html.ActionLink("Transacoes", "Index")
+</p>

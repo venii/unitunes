@@ -139,6 +139,7 @@
     <Compile Include="Controllers\Midia\MusicaController.cs" />
     <Compile Include="Controllers\Midia\PodcastController.cs" />
     <Compile Include="Controllers\Midia\VideoController.cs" />
+    <Compile Include="Controllers\TransacaoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -241,6 +242,11 @@
     <Content Include="Views\Video\Visualizar.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Checkout\Finalizar.cshtml" />
+    <Content Include="Views\Transacao\Create.cshtml" />
+    <Content Include="Views\Transacao\Delete.cshtml" />
+    <Content Include="Views\Transacao\Details.cshtml" />
+    <Content Include="Views\Transacao\Edit.cshtml" />
+    <Content Include="Views\Transacao\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

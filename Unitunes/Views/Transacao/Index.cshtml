@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Unitunes.Models.Transacao>
+
+@{
+    ViewBag.Title = "Transacoes";
+}
+
+<h2>Transacoes</h2>
+
+<p>
+    @Html.ActionLink("Principal", "Principal","Login")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Numero da Transação
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ativo)
+        </td>
+        <td>
+           <!-- @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |-->
+            @Html.ActionLink("Detalhes", "Details", new { id=item.Id }) 
+            <!-- @Html.ActionLink("Delete", "Delete", new { id = item.Id })-->
+        </td>
+    </tr>
+}
+
+</table>

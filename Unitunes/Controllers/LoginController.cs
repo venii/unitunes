@@ -18,10 +18,9 @@ namespace Unitunes.Controllers
         // GET: Login
         public ActionResult Login()
         {
-            if (Unitunes.Models.Servicos.Academico.isAutenticado())
-            {
-                return Redirect("/Login/Principal");
-            }
+         
+               
+            
             return View();
         }
 
@@ -108,6 +107,11 @@ namespace Unitunes.Controllers
         [Authorize]
         public ActionResult Principal()
         {
+
+            var idAcademico = Unitunes.Models.Servicos.Academico.getId();
+            var credito = Unitunes.Models.Servicos.Academico.getSaldo(idAcademico);
+
+            ViewBag.credito = credito;
             ViewBag.nome = Unitunes.Models.Servicos.Academico.getIdNome();
             //passa o model pelo view
 
@@ -123,6 +127,12 @@ namespace Unitunes.Controllers
         [HttpPost]    
         public ActionResult Principal(string tipo,string nome)
         {
+            var idAcademico = Unitunes.Models.Servicos.Academico.getId();
+            var credito = Unitunes.Models.Servicos.Academico.getSaldo(idAcademico);
+
+            ViewBag.credito = credito;
+         
+
             ViewBag.nome = Unitunes.Models.Servicos.Academico.getIdNome();
             var ctx = new dbEntities();
 

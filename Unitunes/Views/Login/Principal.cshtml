@@ -12,7 +12,10 @@
     @Html.ActionLink("Checkout", "Index", "Checkout")|
     @Html.ActionLink("Transações", "Index", "Transacao")|
     @Html.ActionLink(" Principal", "Principal", "Login")|
-    @Html.ActionLink(" Logout", "Logout", "Login")
+    @Html.ActionLink(" Logout", "Logout", "Login")|
+    Creditos: @ViewBag.credito
+    
+
 </p>
 
 
@@ -125,6 +128,7 @@
 
                 <td>
                     @Html.ActionLink("Visualizar", "Visualizar" , item.midia.GetType().Name, new { id = item.midia.Id }, null) 
+                    @Html.ActionLink("Adicionar", "Add", "Checkout", new { id = item.midia.Id }, null)
                     
                 </td>
             </tr>

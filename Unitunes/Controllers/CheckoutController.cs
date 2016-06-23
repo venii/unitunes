@@ -19,6 +19,12 @@ namespace Unitunes.Controllers
             if(errMsg != null)
                 ModelState.AddModelError("error", errMsg);
 
+
+            var idAcademico = Unitunes.Models.Servicos.Academico.getId();
+            var credito = Unitunes.Models.Servicos.Academico.getSaldo(idAcademico);
+
+            ViewBag.credito = credito;
+
             var listaIds = (List<int>)Checkout.getMedias();
             if (listaIds != null)
             {
@@ -35,6 +41,9 @@ namespace Unitunes.Controllers
 
                 return View(resultado);
             }
+
+           
+
             return View();
         }
 
@@ -88,7 +97,8 @@ namespace Unitunes.Controllers
                    
                     var novoCredito = credito - total;
                     Unitunes.Models.Servicos.Academico.setSaldo(idAcademico,novoCredito);
-
+                    
+                    ViewBag.credito = novoCredito;
                    
                     
                     var academicos = ctx.AcademicoSet;
