@@ -18,7 +18,6 @@ namespace Unitunes.Models
         public dbEntities()
             : base("name=dbEntities")
         {
-            System.Data.Entity.Database.SetInitializer(new Unitunes.Initializer.Initializer());
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/20/2016 20:45:34
+-- Date Created: 06/23/2016 13:05:21
 -- Generated from EDMX file: C:\Users\Vinicius\Desktop\Unitunes_final\Unitunes\Unitunes\Models\Modelo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-
+USE [db];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -129,7 +129,7 @@ CREATE TABLE [dbo].[MediaSet] (
     [Nome] nvarchar(max)  NOT NULL,
     [Descricao] nvarchar(max)  NOT NULL,
     [Publicado] bit  NOT NULL,
-    [Preco] decimal(18,0)  NOT NULL,
+    [Preco] float  NOT NULL,
     [Categoria] nvarchar(max)  NOT NULL,
     [DataCriacao] datetime  NOT NULL,
     [Caminho] nvarchar(max)  NULL,

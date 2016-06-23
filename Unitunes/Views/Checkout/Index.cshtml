@@ -2,12 +2,13 @@
 
 @{
     ViewBag.Title = "Checkout";
+    var totalPreco = 0.0;
 }
 
 <h2>Checkout</h2>
 
 <p>
-    @Html.ActionLink("Finalizar Pedido", "Finalizar")
+    
     @Html.ActionLink("Principal", "Principal", "Login")
 </p>
 <table class="table">
@@ -34,6 +35,7 @@
 @if (Model != null)
     {
 foreach (var item in Model) {
+    totalPreco = totalPreco + item.Preco;
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Nome)
@@ -71,3 +73,14 @@ else
     </tr>
 }
 </table>
+Total de creditos das Medias: @totalPreco <br />
+
+@Html.Raw(@Html.ValidationMessage("error")) <br/> <br />
+
+<form action="/Checkout/Finalizar" method="POST">
+
+   
+   <input type="hidden" name="total" value="@totalPreco" />
+    <input type="submit" name="Submit" value="Finalizar Pedido" />
+
+</form>

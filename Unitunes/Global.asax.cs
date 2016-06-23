@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Unitunes.Models;
+using Unitunes.Initializer;
 
 namespace Unitunes
 {
@@ -17,7 +20,7 @@ namespace Unitunes
             AreaRegistration.RegisterAllAreas();
 
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            
+            Database.SetInitializer<dbEntities>(new Unitunes.Initializer.Initializer());
             
         }
         
@@ -38,5 +41,7 @@ namespace Unitunes
                 Response.Redirect("/Login/Registrar");
             }
         }
+
+
     }
 }

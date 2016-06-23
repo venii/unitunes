@@ -14,6 +14,11 @@ namespace Unitunes.Controllers
         // GET: Checkout
         public ActionResult Index()
         {
+            var errMsg = TempData["ErrorMessage"] as string;
+
+            if(errMsg != null)
+                ModelState.AddModelError("error", errMsg);
+
             var listaIds = (List<int>)Checkout.getMedias();
             if (listaIds != null)
             {
@@ -49,7 +54,9 @@ namespace Unitunes.Controllers
 
 
         // GET: Checkout
-        public ActionResult Finalizar()
+
+        [HttpPost]
+        public ActionResult Finalizar(double total)
         {
             if (Checkout.getMedias().Count == 0)
             {
@@ -66,12 +73,49 @@ namespace Unitunes.Controllers
                 var medias = ctx.MediaSet;
 
                 //like usando arraylistaid e contains d media iD
-                var resultado = from m in medias
+                var listaMedias = from m in medias
 
                                 where arrayListaId.Contains(m.Id) && m.Ativo == true
                                 select m;
 
-                return View(resultado);
+
+                //verifica creditos
+                var idAcademico = Unitunes.Models.Servicos.Academico.getId();
+                var credito = Unitunes.Models.Servicos.Academico.getSaldo(idAcademico);
+
+                if (credito > total)
+                {
+                   
+                    var novoCredito = credito - total;
+                    Unitunes.Models.Servicos.Academico.setSaldo(idAcademico,novoCredito);
+
+                   
+                    
+                    var academicos = ctx.AcademicoSet;
+                    // pega obj para referencia a nova transacao
+                    var academicoObj = academicos.Find(idAcademico);
+
+
+
+                    var transacao = ctx.TransacaoSet;
+                    //cria nova transacao para inserir
+                    var novaTransacao = new Transacao { AcademicoDaTransacao = academicoObj, Ativo = true, MediasTransacao = listaMedias.ToList(), Valor = total };
+                    //cria transacao
+                    transacao.Add(novaTransacao);
+                    ctx.SaveChanges();
+                    //da 15% pro admin e o resto pro autor
+
+
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Credito insuficiente";
+                    
+                    return Redirect("/Checkout");
+                }
+
+
+                return View(listaMedias);
             }
             return View();
         }

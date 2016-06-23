@@ -140,6 +140,40 @@ namespace Unitunes.Models.Servicos
                 return null;
             }
         }
+
+
+        public static double getSaldo(int id)
+        {
+            
+                
+                var ctx = new dbEntities();
+
+                var academico = ctx.AcademicoSet;
+                var contaAcademico = ctx.ContaAcademicoSet;
+
+                var conta = contaAcademico.Find(id);
+
+                return conta.Credito;
+
+        }
+
+
+        public static void setSaldo(int id, double vl)
+        {
+
+
+            var ctx = new dbEntities();
+
+            var academico = ctx.AcademicoSet;
+            var contaAcademico = ctx.ContaAcademicoSet;
+
+            var conta = contaAcademico.Find(id);
+            conta.Credito = vl;
+            
+            ctx.Entry(conta).State = System.Data.Entity.EntityState.Modified;
+            ctx.SaveChanges();
+
+        }
  
     }
 
