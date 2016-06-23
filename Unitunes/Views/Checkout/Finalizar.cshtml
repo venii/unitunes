@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Unitunes.Models.Media>
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h2>Finalizar</h2>
+
+<p>
+
+    @Html.ActionLink("Principal", "Principal", "Login")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Preco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCriacao)
+        </th>
+        <th>Tipo</th>
+        <th></th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                </td>
+                <td>
+
+                    @item.GetType().Name
+
+                </td>
+                <td>
+
+                    
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="14">
+                <div>Nenhuma media adicionada</div>
+            </td>
+        </tr>
+    }
+
+
+
+</table>
+    Total de creditos das Medias: 100 <br/>

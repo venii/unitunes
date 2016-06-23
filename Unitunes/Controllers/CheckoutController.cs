@@ -22,7 +22,6 @@ namespace Unitunes.Controllers
                 var ctx = new dbEntities();
 
                 var medias = ctx.MediaSet;
-                var academico = ctx.AcademicoSet;
                 //like usando arraylistaid e contains d media iD
                 var resultado = from m in medias
                                  
@@ -56,7 +55,24 @@ namespace Unitunes.Controllers
             {
                 return Redirect("/Checkout");
             }
-            //CARREGAR A MESMA LISTA
+
+            var listaIds = (List<int>)Checkout.getMedias();
+            if (listaIds != null)
+            {
+                var arrayListaId = listaIds.ToArray();
+
+                var ctx = new dbEntities();
+
+                var medias = ctx.MediaSet;
+
+                //like usando arraylistaid e contains d media iD
+                var resultado = from m in medias
+
+                                where arrayListaId.Contains(m.Id) && m.Ativo == true
+                                select m;
+
+                return View(resultado);
+            }
             return View();
         }
 

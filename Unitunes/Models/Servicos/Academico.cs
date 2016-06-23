@@ -86,7 +86,7 @@ namespace Unitunes.Models.Servicos
 
                 if (existeUsuario.Count() > 0)
                 {
-
+                    
                     HttpContext.Current.Session["Id"] = existeUsuario.First().Id;
                     HttpContext.Current.Session["PrimeiroNome"] = existeUsuario.First().PrimeiroNome;
                     HttpContext.Current.Session["SegundoNome"] = existeUsuario.First().SegundoNome;

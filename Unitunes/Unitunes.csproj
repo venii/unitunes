@@ -240,6 +240,7 @@
     <Content Include="Views\Podcast\Visualizar.cshtml" />
     <Content Include="Views\Video\Visualizar.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
+    <Content Include="Views\Checkout\Finalizar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
