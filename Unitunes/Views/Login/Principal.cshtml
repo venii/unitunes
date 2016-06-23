@@ -82,9 +82,7 @@
         <th>
             @Html.DisplayNameFor(model => model.midia.DataCriacao)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.midia.Caminho)
-        </th>
+
         <th>
             @Html.DisplayName("Tipo")
         </th>
@@ -116,9 +114,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.midia.DataCriacao)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.midia.Caminho)
-                </td>
+
                 <td>
                     @item.midia.GetType().Name
                 </td>
