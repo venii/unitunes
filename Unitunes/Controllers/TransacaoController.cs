@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,6 +14,31 @@ namespace Unitunes.Controllers
     public class TransacaoController : Controller
     {
         private dbEntities db = new dbEntities();
+
+
+        // GET: Transacao fileResult
+        public FileResult Download(int idTransacao, int idMedia)
+        {
+
+
+            var idAcademico = Unitunes.Models.Servicos.Academico.getId();
+            var academicos = db.AcademicoSet;
+            // pega obj para referencia a nova transacao
+            var academicoObj = academicos.Find(idAcademico);
+
+            var resultado = db.TransacaoSet.Where(t => t.AcademicoDaTransacao.Id == idAcademico).First();
+            if (resultado != null)
+            {
+                var caminho = resultado.MediasTransacao.Where(m => m.Id == idMedia).First();
+                
+                byte[] fileBytes = System.IO.File.ReadAllBytes(@caminho.Caminho);
+                string fileName = Path.GetFileNameWithoutExtension(@caminho.Caminho);
+                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+            }
+
+
+            return null;
+        }
 
         // GET: Transacao
         public ActionResult Index()

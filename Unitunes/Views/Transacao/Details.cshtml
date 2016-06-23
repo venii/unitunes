@@ -50,7 +50,7 @@
                     @Html.DisplayFor(modelItem => item.Preco)
                 </td>
                 <td>
-                    @Html.ActionLink("Download", "Download", new { id = item.Id }) 
+                    @Html.ActionLink("Download", "Download", new { idTransacao = Model.Id,idMedia = item.Id }) 
                    
                 </td>
             </tr>
@@ -60,5 +60,5 @@
 </div>
 <p>
     
-    @Html.ActionLink("Transacoes", "Index")
+    @Html.ActionLink("Transacao", "Index")
 </p>
