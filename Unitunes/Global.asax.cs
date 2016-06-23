@@ -11,11 +11,14 @@ namespace Unitunes
     {
         protected void Application_Start()
         {
+            //seed do db
+            
+
             AreaRegistration.RegisterAllAreas();
 
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            //seed do db
-            //System.Data.Entity.Database.SetInitializer(new Unitunes.Initializer.Initializer());
+            
+            
         }
         
         void Application_EndRequest(object sender, System.EventArgs e)

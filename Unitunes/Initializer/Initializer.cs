@@ -10,7 +10,7 @@ using Unitunes.Models.Servicos;
 namespace Unitunes.Initializer
 {
 
-    public class Initializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<dbEntities>
+    public class Initializer : System.Data.Entity.CreateDatabaseIfNotExists<dbEntities>
     {
         protected override void Seed(dbEntities context)
         {
@@ -18,7 +18,7 @@ namespace Unitunes.Initializer
 
             var academico = new List<Unitunes.Models.Academico>
             {
-                new Administrador{Id = 1,Email ="admin",Password="1234",PrimeiroNome="Administrator",SegundoNome="",ContaAcademico =new ContaAcademico{Id = 1 , Credito = 0 , Ativo = true} },
+                new Administrador{Id = 1,Email ="admin",Password="1234",PrimeiroNome="Administrator",SegundoNome="Administrator",ContaAcademico =new ContaAcademico{Id = 1 , Credito = 0 , Ativo = true} },
             };
 
            /* var medias = new List<Media>
@@ -27,8 +27,8 @@ namespace Unitunes.Initializer
                    };
             */
             academico.ForEach(s => context.AcademicoSet.Add(s));
-           
-            context.SaveChanges();
+
+            //context.SaveChanges();
         }
     }
 }
