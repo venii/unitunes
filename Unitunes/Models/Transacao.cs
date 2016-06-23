@@ -22,8 +22,9 @@ namespace Unitunes.Models
         public int Id { get; set; }
         public double Valor { get; set; }
         public bool Ativo { get; set; }
+        public int AcademicoId { get; set; }
     
-        public virtual Academico AcademicoDaTransacao { get; set; }
         public virtual ICollection<Media> MediasTransacao { get; set; }
+        public virtual Academico AcademicoDaTransacao { get; set; }
     }
 }

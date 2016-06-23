@@ -13,7 +13,9 @@
     @Html.ActionLink("Transações", "Index", "Transacao")|
     @Html.ActionLink(" Principal", "Principal", "Login")|
     @Html.ActionLink(" Logout", "Logout", "Login")|
-    Creditos: @ViewBag.credito
+    Creditos: @ViewBag.credito|
+
+    Nome: @ViewBag.nome
     
     @if (User.IsInRole("Administrador"))
     {

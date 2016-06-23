@@ -111,6 +111,8 @@ namespace Unitunes.Controllers
             var idAcademico = Unitunes.Models.Servicos.Academico.getId();
             var credito = Unitunes.Models.Servicos.Academico.getSaldo(idAcademico);
 
+            ViewBag.nome = Unitunes.Models.Servicos.Academico.getIdNome();
+
             ViewBag.credito = credito;
             ViewBag.nome = Unitunes.Models.Servicos.Academico.getIdNome();
             //passa o model pelo view
@@ -130,6 +132,7 @@ namespace Unitunes.Controllers
             var idAcademico = Unitunes.Models.Servicos.Academico.getId();
             var credito = Unitunes.Models.Servicos.Academico.getSaldo(idAcademico);
 
+            ViewBag.nome = Unitunes.Models.Servicos.Academico.getIdNome();
             ViewBag.credito = credito;
          
 

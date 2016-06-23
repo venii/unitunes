@@ -26,13 +26,35 @@ namespace Unitunes.Controllers
             var academicos = db.AcademicoSet;
             // pega obj para referencia a nova transacao
             var academicoObj = academicos.Find(idAcademico);
-
-            var resultado = db.TransacaoSet.Where(t => t.AcademicoDaTransacao.Id == idAcademico).First();
-            if (resultado != null)
+            var resultado = (Transacao)null;
+            var caminho = (Media)null;
+            
+            if (!User.IsInRole("Administrador"))
             {
-                try { 
-                    var caminho = resultado.MediasTransacao.Where(m => m.Id == idMedia).First();
-                
+                resultado = db.TransacaoSet.Where(t => t.AcademicoDaTransacao.Id == idAcademico).First();
+                if (resultado != null)
+                {
+                    try
+                    {
+                         caminho = resultado.MediasTransacao.Where(m => m.Id == idMedia).First();
+
+                        byte[] fileBytes = System.IO.File.ReadAllBytes(@caminho.Caminho);
+                        string fileName = Path.GetFileNameWithoutExtension(@caminho.Caminho);
+                        return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    resultado = db.TransacaoSet.Where(t => t.Id == idTransacao).First();
+                    caminho = resultado.MediasTransacao.Where(m => m.Id == idMedia).First();
+
                     byte[] fileBytes = System.IO.File.ReadAllBytes(@caminho.Caminho);
                     string fileName = Path.GetFileNameWithoutExtension(@caminho.Caminho);
                     return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
@@ -42,7 +64,6 @@ namespace Unitunes.Controllers
                     return null;
                 }
             }
-
 
             return null;
         }
@@ -56,8 +77,14 @@ namespace Unitunes.Controllers
             var academicos = db.AcademicoSet;
             // pega obj para referencia a nova transacao
             var academicoObj = academicos.Find(idAcademico);
-
-            return View(db.TransacaoSet.Where(t => t.AcademicoDaTransacao.Id == idAcademico).ToList());
+            
+            if (!User.IsInRole("Administrador")) { 
+                return View(db.TransacaoSet.Where(t => t.AcademicoDaTransacao.Id == idAcademico).ToList());
+            }
+            else
+            {
+                return View(db.TransacaoSet.ToList());
+            }
         }
 
         // GET: Transacao/Details/5

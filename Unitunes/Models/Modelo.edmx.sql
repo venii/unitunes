@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/23/2016 13:05:21
+-- Date Created: 06/23/2016 18:24:37
 -- Generated from EDMX file: C:\Users\Vinicius\Desktop\Unitunes_final\Unitunes\Unitunes\Models\Modelo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [db];
+
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -118,8 +118,7 @@ CREATE TABLE [dbo].[AcademicoSet] (
     [Password] nvarchar(max)  NOT NULL,
     [PrimeiroNome] nvarchar(max)  NOT NULL,
     [SegundoNome] nvarchar(max)  NOT NULL,
-    [Ativo] bit  NOT NULL,
-    [TransacaoAcademico_Academico_Id] int  NULL
+    [Ativo] bit  NOT NULL
 );
 GO
 
@@ -143,7 +142,8 @@ GO
 CREATE TABLE [dbo].[TransacaoSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Valor] float  NOT NULL,
-    [Ativo] bit  NOT NULL
+    [Ativo] bit  NOT NULL,
+    [AcademicoId] int  NOT NULL
 );
 GO
 
@@ -388,21 +388,6 @@ ON [dbo].[MediaSet]
     ([AcademicoId]);
 GO
 
--- Creating foreign key on [TransacaoAcademico_Academico_Id] in table 'AcademicoSet'
-ALTER TABLE [dbo].[AcademicoSet]
-ADD CONSTRAINT [FK_TransacaoAcademico]
-    FOREIGN KEY ([TransacaoAcademico_Academico_Id])
-    REFERENCES [dbo].[TransacaoSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TransacaoAcademico'
-CREATE INDEX [IX_FK_TransacaoAcademico]
-ON [dbo].[AcademicoSet]
-    ([TransacaoAcademico_Academico_Id]);
-GO
-
 -- Creating foreign key on [TransacaoMedia_Media_Id] in table 'TransacaoMedia'
 ALTER TABLE [dbo].[TransacaoMedia]
 ADD CONSTRAINT [FK_TransacaoMedia_Transacao]
@@ -425,6 +410,21 @@ GO
 CREATE INDEX [IX_FK_TransacaoMedia_Media]
 ON [dbo].[TransacaoMedia]
     ([MediasTransacao_Id]);
+GO
+
+-- Creating foreign key on [AcademicoId] in table 'TransacaoSet'
+ALTER TABLE [dbo].[TransacaoSet]
+ADD CONSTRAINT [FK_AcademicoTransacao]
+    FOREIGN KEY ([AcademicoId])
+    REFERENCES [dbo].[AcademicoSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AcademicoTransacao'
+CREATE INDEX [IX_FK_AcademicoTransacao]
+ON [dbo].[TransacaoSet]
+    ([AcademicoId]);
 GO
 
 -- Creating foreign key on [Id] in table 'MediaSet_Musica'
