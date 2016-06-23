@@ -13,13 +13,12 @@ namespace Unitunes.Models.Servicos
         {
             var ctx = new dbEntities();
             
-            try { 
+            try {
+                academico.ContaAcademico = new ContaAcademico { Ativo = true, Credito = 0 };
                 ctx.AcademicoSet.Add(academico);
                 ctx.SaveChanges();
 
-                ContaAcademico ca = new ContaAcademico{Ativo= true , Id = academico.Id, Credito = 0  };
-                ctx.ContaAcademicoSet.Add(ca);
-                ctx.SaveChanges();
+               
             }
             catch (DbEntityValidationException e)
             {

@@ -122,6 +122,7 @@ namespace Unitunes.Controllers.Midia
 
             livroViewModel.midia = (Livro)midiaRepo.GetById(id);
 
+            ViewBag.id = livroViewModel.midia.Id;
 
             return View(livroViewModel);
 

@@ -123,7 +123,7 @@ namespace Unitunes.Controllers.Midia
 
             videoViewModel.midia = (Video)midiaRepo.GetById(id);
 
-
+            ViewBag.id = videoViewModel.midia.Id;
             return View(videoViewModel);
 
         }

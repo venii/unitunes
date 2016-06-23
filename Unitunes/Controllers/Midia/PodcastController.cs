@@ -122,7 +122,7 @@ namespace Unitunes.Controllers.Midia
 
             podcastViewModel.midia = (Podcast)midiaRepo.GetById(id);
 
-
+            ViewBag.id = podcastViewModel.midia.Id;
             return View(podcastViewModel);
 
         }
