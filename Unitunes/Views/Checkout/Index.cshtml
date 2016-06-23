@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<Unitunes.Models.Media>
 
 @{
-    ViewBag.Title = "Listar";
+    ViewBag.Title = "Checkout";
 }
 
-<h2>Listar</h2>
+<h2>Checkout</h2>
 
 <p>
-    @Html.ActionLink(" Adicionar Nova midia", "CriarNovaMidia")
-    @Html.ActionLink("Principal", "Principal","Login")
-
+    @Html.ActionLink("Fechar Pedido", "Checkout")
 </p>
 <table class="table">
     <tr>
@@ -35,13 +33,19 @@
             @Html.DisplayNameFor(model => model.Caminho)
         </th>
         <th>
-            @Html.DisplayName("Tipo")
+            @Html.DisplayNameFor(model => model.AcademicoId)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Disponivel)
+        </th>
         <th></th>
     </tr>
-@if(Model != null){
-    foreach (var item in Model) {
+@if (Model != null)
+    {
+foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Nome)
@@ -65,14 +69,27 @@
             @Html.DisplayFor(modelItem => item.Caminho)
         </td>
         <td>
-            @item.GetType().Name
+            @Html.DisplayFor(modelItem => item.AcademicoId)
         </td>
-
         <td>
-            @Html.ActionLink("Editar", "Editar", item.GetType().Name, new { id = item.Id }, null) |
-            @Html.ActionLink("Deletar", "Deletar", item.GetType().Name, new { id = item.Id }, null) |
-</td>
+            @Html.DisplayFor(modelItem => item.Ativo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disponivel)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
     </tr>
+}
     }
+else
+{
+    <tr><td colspan="14">
+    <div>Nenhuma media adicionada</div>
+       </td>
+    </tr>
 }
 </table>

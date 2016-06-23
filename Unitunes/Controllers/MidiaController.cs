@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Unitunes.Models;
 using Unitunes.Models.Abstratos;
-using Unitunes.Models.ModelosApp;
+using Unitunes.Models.Servicos;
 using Unitunes.Models.ViewModel;
 
 namespace Unitunes.Controllers
@@ -19,9 +19,9 @@ namespace Unitunes.Controllers
         //GET : LISTAR MIDIAS
         public ActionResult Listar()
         {
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
             //passa o model pelo view
-            int id = Unitunes.Models.ModelosApp.Academico.getId();
+            int id = Unitunes.Models.Servicos.Academico.getId();
 
             var minhasMidias = midiaRepo.GetByIdAcademico(id);
 

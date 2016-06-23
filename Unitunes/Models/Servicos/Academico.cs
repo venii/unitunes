@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 
-namespace Unitunes.Models.ModelosApp
+namespace Unitunes.Models.Servicos
 {
     public class Academico
     {
@@ -15,6 +15,10 @@ namespace Unitunes.Models.ModelosApp
             
             try { 
                 ctx.AcademicoSet.Add(academico);
+                ctx.SaveChanges();
+
+                ContaAcademico ca = new ContaAcademico{Ativo= true , Id = academico.Id, Credito = 0  };
+                ctx.ContaAcademicoSet.Add(ca);
                 ctx.SaveChanges();
             }
             catch (DbEntityValidationException e)
@@ -43,7 +47,7 @@ namespace Unitunes.Models.ModelosApp
             var ctx = new dbEntities();
             var login = ctx.AcademicoSet;
 
-            var existeUsuario = from u in login where u.Email == academico.Email & u.Password == academico.Password select u;
+            var existeUsuario = from u in login where u.Email == academico.Email & u.Password == academico.Password select u ;
 
             if (existeUsuario.Count() > 0)
             {

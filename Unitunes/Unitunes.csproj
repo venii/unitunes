@@ -123,7 +123,6 @@
       <LastGenOutput>Modelos.cs</LastGenOutput>
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Content>
-    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -133,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MidiaController.cs" />
     <Compile Include="Controllers\Midia\LivroController.cs" />
@@ -142,6 +142,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Initializer\Initializer.cs" />
     <Compile Include="Models\Abstratos\Singleton.cs" />
     <Compile Include="Models\Academico.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
@@ -186,8 +187,9 @@
     <Compile Include="Models\Podcast.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Repositorios\Academico.cs" />
+    <Compile Include="Models\Servicos\Academico.cs" />
     <Compile Include="Models\Repositorios\Midia.cs" />
+    <Compile Include="Models\Servicos\Checkout.cs" />
     <Compile Include="Models\Transacao.cs">
       <DependentUpon>Modelos.tt</DependentUpon>
     </Compile>
@@ -237,6 +239,7 @@
     <Content Include="Views\Musica\Visualizar.cshtml" />
     <Content Include="Views\Podcast\Visualizar.cshtml" />
     <Content Include="Views\Video\Visualizar.cshtml" />
+    <Content Include="Views\Checkout\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

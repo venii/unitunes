@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using Unitunes.Models;
 using Unitunes.Models.Abstratos;
+using Unitunes.Models.Repositorios;
+using Unitunes.Models.Servicos;
 
 namespace Unitunes.Controllers.Midia
 {
@@ -49,10 +51,10 @@ namespace Unitunes.Controllers.Midia
 
                 }
 
-                musicaViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
+                musicaViewModel.midia.AcademicoId = Unitunes.Models.Servicos.Academico.getId();
                 musicaViewModel.midia.Ativo = true;
 
-                var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+                var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
                 midiaRepo.Save(musicaViewModel.midia);
 
                 return Redirect("/Midia/Listar");
@@ -65,8 +67,8 @@ namespace Unitunes.Controllers.Midia
         public ActionResult Editar(int id)
         {
             Unitunes.Models.ViewModel.MusicaViewModel musicaViewModel = new Models.ViewModel.MusicaViewModel();
-            
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             musicaViewModel.midia = (Musica)midiaRepo.GetById(id);
 
@@ -81,7 +83,7 @@ namespace Unitunes.Controllers.Midia
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Unitunes.Models.ViewModel.MusicaViewModel musicaViewModel)
         {
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             if (ModelState.IsValid)
             {
@@ -103,7 +105,7 @@ namespace Unitunes.Controllers.Midia
 
                 //nao esquecer academicoID
                 musicaViewModel.midia.Ativo = true;
-                musicaViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
+                musicaViewModel.midia.AcademicoId = Unitunes.Models.Servicos.Academico.getId();
                 midiaRepo.Update(musicaViewModel.midia);
 
                 return Redirect("/Midia/Listar");
@@ -118,7 +120,7 @@ namespace Unitunes.Controllers.Midia
         {
             Unitunes.Models.ViewModel.MusicaViewModel musicaViewModel = new Models.ViewModel.MusicaViewModel();
 
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             musicaViewModel.midia = (Musica)midiaRepo.GetById(id);
 
@@ -132,7 +134,7 @@ namespace Unitunes.Controllers.Midia
         {
             Unitunes.Models.ViewModel.MusicaViewModel musicaViewModel = new Models.ViewModel.MusicaViewModel();
 
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             musicaViewModel.midia = (Musica)midiaRepo.GetById(id);
 
@@ -146,7 +148,7 @@ namespace Unitunes.Controllers.Midia
         [ValidateAntiForgeryToken]
         public ActionResult Deletar(Unitunes.Models.ViewModel.MusicaViewModel musicaViewModel)
         {
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
             musicaViewModel.midia.Ativo = false;
 
             midiaRepo.Update(musicaViewModel.midia);

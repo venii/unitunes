@@ -10,10 +10,10 @@ using System.Web;
 using System.Web.Mvc;
 using Unitunes.Models.Abstratos;
 using Unitunes.Models.Contratos;
-using Unitunes.Models.ModelosApp;
 
 
-namespace Unitunes.Models.ModelosApp 
+
+namespace Unitunes.Models.Repositorios 
 {
     public class Midia : Singleton<Midia>, IRepository<Media>
     {

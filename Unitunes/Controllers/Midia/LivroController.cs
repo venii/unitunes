@@ -49,10 +49,10 @@ namespace Unitunes.Controllers.Midia
 
                 }
 
-                livroViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
+                livroViewModel.midia.AcademicoId = Unitunes.Models.Servicos.Academico.getId();
                 livroViewModel.midia.Ativo = true;
 
-                var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+                var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
                 midiaRepo.Save(livroViewModel.midia);
 
                 return Redirect("/Midia/Listar");
@@ -65,8 +65,8 @@ namespace Unitunes.Controllers.Midia
         public ActionResult Editar(int id)
         {
             Unitunes.Models.ViewModel.LivroViewModel livroViewModel = new Models.ViewModel.LivroViewModel();
-            
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             livroViewModel.midia = (Livro)midiaRepo.GetById(id);
 
@@ -81,7 +81,7 @@ namespace Unitunes.Controllers.Midia
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Unitunes.Models.ViewModel.LivroViewModel livroViewModel)
         {
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace Unitunes.Controllers.Midia
 
                 //nao esquecer academicoID
                 livroViewModel.midia.Ativo = true;
-                livroViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
+                livroViewModel.midia.AcademicoId = Unitunes.Models.Servicos.Academico.getId();
                 midiaRepo.Update(livroViewModel.midia);
 
                 return Redirect("/Midia/Listar");
@@ -118,7 +118,7 @@ namespace Unitunes.Controllers.Midia
         {
             Unitunes.Models.ViewModel.LivroViewModel livroViewModel = new Models.ViewModel.LivroViewModel();
 
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             livroViewModel.midia = (Livro)midiaRepo.GetById(id);
 
@@ -132,7 +132,7 @@ namespace Unitunes.Controllers.Midia
         {
             Unitunes.Models.ViewModel.LivroViewModel livroViewModel = new Models.ViewModel.LivroViewModel();
 
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             livroViewModel.midia = (Livro)midiaRepo.GetById(id);
 
@@ -146,7 +146,7 @@ namespace Unitunes.Controllers.Midia
         [ValidateAntiForgeryToken]
         public ActionResult Deletar(Unitunes.Models.ViewModel.LivroViewModel livroViewModel)
         {
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
             livroViewModel.midia.Ativo = false;
 
             midiaRepo.Update(livroViewModel.midia);

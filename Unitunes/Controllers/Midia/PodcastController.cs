@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Unitunes.Models;
 using Unitunes.Models.Abstratos;
-
+using Unitunes.Models.Repositorios;
 namespace Unitunes.Controllers.Midia
 {
     public class PodcastController : Controller
@@ -49,10 +49,10 @@ namespace Unitunes.Controllers.Midia
 
                 }
 
-                podcastViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
+                podcastViewModel.midia.AcademicoId = Unitunes.Models.Servicos.Academico.getId();
                 podcastViewModel.midia.Ativo = true;
 
-                var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+                var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
                 midiaRepo.Save(podcastViewModel.midia);
 
                 return Redirect("/Midia/Listar");
@@ -65,8 +65,8 @@ namespace Unitunes.Controllers.Midia
         public ActionResult Editar(int id)
         {
             Unitunes.Models.ViewModel.PodcastViewModel podcastViewModel = new Models.ViewModel.PodcastViewModel();
-            
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             podcastViewModel.midia = (Podcast)midiaRepo.GetById(id);
 
@@ -81,7 +81,7 @@ namespace Unitunes.Controllers.Midia
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Unitunes.Models.ViewModel.PodcastViewModel podcastViewModel)
         {
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace Unitunes.Controllers.Midia
 
                 //nao esquecer academicoID
                 podcastViewModel.midia.Ativo = true;
-                podcastViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
+                podcastViewModel.midia.AcademicoId = Unitunes.Models.Servicos.Academico.getId();
                 midiaRepo.Update(podcastViewModel.midia);
 
                 return Redirect("/Midia/Listar");
@@ -118,7 +118,7 @@ namespace Unitunes.Controllers.Midia
         {
             Unitunes.Models.ViewModel.PodcastViewModel podcastViewModel = new Models.ViewModel.PodcastViewModel();
 
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             podcastViewModel.midia = (Podcast)midiaRepo.GetById(id);
 
@@ -132,7 +132,7 @@ namespace Unitunes.Controllers.Midia
         {
             Unitunes.Models.ViewModel.PodcastViewModel podcastViewModel = new Models.ViewModel.PodcastViewModel();
 
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             podcastViewModel.midia = (Podcast)midiaRepo.GetById(id);
 
@@ -146,7 +146,7 @@ namespace Unitunes.Controllers.Midia
         [ValidateAntiForgeryToken]
         public ActionResult Deletar(Unitunes.Models.ViewModel.PodcastViewModel podcastViewModel)
         {
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
             podcastViewModel.midia.Ativo = false;
 
             midiaRepo.Update(podcastViewModel.midia);

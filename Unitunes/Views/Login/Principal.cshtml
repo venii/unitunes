@@ -7,8 +7,10 @@
 <h2>Listar</h2>
 
 <p>
-    @Html.ActionLink(" Adicionar Nova midia", "CriarNovaMidia","Midia")
-    @Html.ActionLink(" Minhas midias", "Listar", "Midia")
+    @Html.ActionLink(" Adicionar Nova midia", "CriarNovaMidia", "Midia")|
+    @Html.ActionLink(" Minhas midias", "Listar", "Midia")|
+    @Html.ActionLink("Checkout", "Index", "Checkout")|
+    @Html.ActionLink("Transações", "Index", "Transacao")|
     @Html.ActionLink(" Principal", "Principal", "Login")
 </p>
 
@@ -125,7 +127,7 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Visualizar", "Visualizar" , item.midia.GetType().Name, new { id = item.midia.Id }, null) |
+                    @Html.ActionLink("Visualizar", "Visualizar" , item.midia.GetType().Name, new { id = item.midia.Id }, null) 
                     
                 </td>
             </tr>

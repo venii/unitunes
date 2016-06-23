@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Unitunes.Models;
 using Unitunes.Models.Abstratos;
+using Unitunes.Models.Repositorios;
 
 namespace Unitunes.Controllers.Midia
 {
@@ -49,10 +50,10 @@ namespace Unitunes.Controllers.Midia
 
                 }
 
-                videoViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
+                videoViewModel.midia.AcademicoId = Unitunes.Models.Servicos.Academico.getId();
                 videoViewModel.midia.Ativo = true;
 
-                var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+                var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
                 midiaRepo.Save(videoViewModel.midia);
 
                 return Redirect("/Midia/Listar");
@@ -65,8 +66,8 @@ namespace Unitunes.Controllers.Midia
         public ActionResult Editar(int id)
         {
             Unitunes.Models.ViewModel.VideoViewModel videoViewModel = new Models.ViewModel.VideoViewModel();
-            
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
             
             videoViewModel.midia = (Video)midiaRepo.GetById(id);
 
@@ -81,7 +82,7 @@ namespace Unitunes.Controllers.Midia
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Unitunes.Models.ViewModel.VideoViewModel videoViewModel)
         {
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             if (ModelState.IsValid)
             {
@@ -103,7 +104,7 @@ namespace Unitunes.Controllers.Midia
 
                 //nao esquecer academicoID
                 videoViewModel.midia.Ativo = true;
-                videoViewModel.midia.AcademicoId = Unitunes.Models.ModelosApp.Academico.getId();
+                videoViewModel.midia.AcademicoId = Unitunes.Models.Servicos.Academico.getId();
                 midiaRepo.Update(videoViewModel.midia);
 
                 return Redirect("/Midia/Listar");
@@ -118,7 +119,7 @@ namespace Unitunes.Controllers.Midia
         {
             Unitunes.Models.ViewModel.VideoViewModel videoViewModel = new Models.ViewModel.VideoViewModel();
 
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             videoViewModel.midia = (Video)midiaRepo.GetById(id);
 
@@ -132,7 +133,7 @@ namespace Unitunes.Controllers.Midia
         {
             Unitunes.Models.ViewModel.VideoViewModel videoViewModel = new Models.ViewModel.VideoViewModel();
 
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
 
             videoViewModel.midia = (Video)midiaRepo.GetById(id);
 
@@ -146,7 +147,7 @@ namespace Unitunes.Controllers.Midia
         [ValidateAntiForgeryToken]
         public ActionResult Deletar(Unitunes.Models.ViewModel.VideoViewModel videoViewModel)
         {
-            var midiaRepo = Singleton<Unitunes.Models.ModelosApp.Midia>.Instance();
+            var midiaRepo = Singleton<Unitunes.Models.Repositorios.Midia>.Instance();
             videoViewModel.midia.Ativo = false;
 
             midiaRepo.Update(videoViewModel.midia);

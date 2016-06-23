@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Unitunes.Models;
 using Unitunes.Models.ViewModel;
+using Unitunes.Models.Servicos;
 
 namespace Unitunes.Controllers
 {
@@ -17,7 +18,10 @@ namespace Unitunes.Controllers
         // GET: Login
         public ActionResult Login()
         {
-
+            if (Unitunes.Models.Servicos.Academico.isAutenticado())
+            {
+                return Redirect("/Login/Principal");
+            }
             return View();
         }
 
@@ -26,13 +30,13 @@ namespace Unitunes.Controllers
         public ActionResult Login(string login,string password)
         {
 
-            Academico novoLogin = new Academico();
+            Unitunes.Models.Academico novoLogin = new Unitunes.Models.Academico();
             novoLogin.Email = login;
             novoLogin.Password = password;
 
-            if (Unitunes.Models.ModelosApp.Academico.isAcademicoExists(novoLogin))
+            if (Unitunes.Models.Servicos.Academico.isAcademicoExists(novoLogin))
             {
-                Unitunes.Models.ModelosApp.Academico.autenticar(novoLogin);
+                Unitunes.Models.Servicos.Academico.autenticar(novoLogin);
                 return Redirect("/Login/Principal");
 
             }
@@ -54,7 +58,7 @@ namespace Unitunes.Controllers
 
         //POST : REGISTRAR
         [HttpPost]
-        public ActionResult Registrar(Academico academico)
+        public ActionResult Registrar(Unitunes.Models.Academico academico)
         {
             
             //verifica se existe o registro
@@ -69,12 +73,12 @@ namespace Unitunes.Controllers
 
 
                 //verifica se usuario nao existe
-                if (!Unitunes.Models.ModelosApp.Academico.isAcademicoExists(academico))
+                if (!Unitunes.Models.Servicos.Academico.isAcademicoExists(academico))
                 {
 
                     //cria usuario
-                    Unitunes.Models.ModelosApp.Academico.adicionarAcademico(academico);
-                    Unitunes.Models.ModelosApp.Academico.autenticar(academico);
+                    Unitunes.Models.Servicos.Academico.adicionarAcademico(academico);
+                    Unitunes.Models.Servicos.Academico.autenticar(academico);
                     return Redirect("/Login/Principal");
 
                 }
@@ -96,7 +100,7 @@ namespace Unitunes.Controllers
         [Authorize]
         public ActionResult Logout()
         {
-            Unitunes.Models.ModelosApp.Academico.logoff();
+            Unitunes.Models.Servicos.Academico.logoff();
             return Redirect("/Login/Login");
         }
 
@@ -104,7 +108,7 @@ namespace Unitunes.Controllers
         [Authorize]
         public ActionResult Principal()
         {
-            ViewBag.nome = Unitunes.Models.ModelosApp.Academico.getIdNome();
+            ViewBag.nome = Unitunes.Models.Servicos.Academico.getIdNome();
             //passa o model pelo view
 
             //listar tipos
@@ -119,7 +123,7 @@ namespace Unitunes.Controllers
         [HttpPost]    
         public ActionResult Principal(string tipo,string nome)
         {
-            ViewBag.nome = Unitunes.Models.ModelosApp.Academico.getIdNome();
+            ViewBag.nome = Unitunes.Models.Servicos.Academico.getIdNome();
             var ctx = new dbEntities();
 
             var medias = ctx.MediaSet;
@@ -132,26 +136,26 @@ namespace Unitunes.Controllers
                     resultado =     (from m in medias
                                     join a in academico on m.AcademicoId equals a.Id
                                     where m.Nome.Contains(nome) && m.Ativo == true && m is Musica
-                                     select new PrincipalViewModel { midia = m, academico = (Academico)a }).AsEnumerable();
+                                     select new PrincipalViewModel { midia = m, academico = (Unitunes.Models.Academico)a }).AsEnumerable();
 
                     break;
                 case "Video":
                     resultado = (from m in medias
                                     join a in academico on m.AcademicoId equals a.Id
                                     where m.Nome.Contains(nome) && m.Ativo == true && m is Video
-                                 select new PrincipalViewModel { midia = m, academico = (Academico)a }).AsEnumerable();
+                                 select new PrincipalViewModel { midia = m, academico = (Unitunes.Models.Academico)a }).AsEnumerable();
                     break;
                 case "Podcast":
                     resultado = (from m in medias
                                 join a in academico on m.AcademicoId equals a.Id
                                 where m.Nome.Contains(nome) && m.Ativo == true && m is Podcast
-                                 select new PrincipalViewModel { midia = m, academico = (Academico)a }).AsEnumerable();
+                                 select new PrincipalViewModel { midia = m, academico = (Unitunes.Models.Academico)a }).AsEnumerable();
                     break;
                 case "Livro":
                     resultado = (from m in medias
                                 join a in academico on m.AcademicoId equals a.Id
                                 where m.Nome.Contains(nome) && m.Ativo == true && m is Livro
-                                select new PrincipalViewModel { midia = m, academico = (Academico)a }).AsEnumerable();
+                                select new PrincipalViewModel { midia = m, academico = (Unitunes.Models.Academico)a }).AsEnumerable();
                     break;
             }
 
