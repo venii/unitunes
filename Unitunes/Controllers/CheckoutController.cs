@@ -46,5 +46,19 @@ namespace Unitunes.Controllers
             Checkout.removeMedia(id);
             return Redirect("/Checkout");
         }
+
+
+
+        // GET: Checkout
+        public ActionResult Finalizar()
+        {
+            if (Checkout.getMedias().Count == 0)
+            {
+                return Redirect("/Checkout");
+            }
+            //CARREGAR A MESMA LISTA
+            return View();
+        }
+
     }
 }
