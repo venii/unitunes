@@ -23,13 +23,13 @@ namespace Unitunes.Controllers
 
                 var medias = ctx.MediaSet;
                 var academico = ctx.AcademicoSet;
-
+                //like usando arraylistaid e contains d media iD
                 var resultado = (from m in medias
-                                 join a in academico on m.AcademicoId equals a.Id
+                                 
                                  where arrayListaId.Contains(m.Id) && m.Ativo == true
-                                 select m).AsEnumerable();
+                                 select m);
 
-                return View(resultado);
+                return View((IEnumerable<Unitunes.Models.Media>)resultado);
             }
             return View();
         }
