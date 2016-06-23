@@ -87,6 +87,7 @@ namespace Unitunes.Models.Servicos
 
                 if (existeUsuario.Count() > 0)
                 {
+
                     HttpContext.Current.Session["Id"] = existeUsuario.First().Id;
                     HttpContext.Current.Session["PrimeiroNome"] = existeUsuario.First().PrimeiroNome;
                     HttpContext.Current.Session["SegundoNome"] = existeUsuario.First().SegundoNome;
@@ -126,10 +127,19 @@ namespace Unitunes.Models.Servicos
         }
 
         public static string getIdNome(){
-            string n1 = HttpContext.Current.Session["PrimeiroNome"].ToString();
-            string n2 = HttpContext.Current.Session["SegundoNome"].ToString();
+            try { 
+               
+                string n1 = HttpContext.Current.Session["PrimeiroNome"].ToString();
+                string n2 = HttpContext.Current.Session["SegundoNome"].ToString();
             
-            return n1 + " " + n2;
+                return n1 + " " + n2;
+
+            }
+            catch (Exception)
+            {
+                Academico.logoff();
+                return null;
+            }
         }
  
     }

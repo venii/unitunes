@@ -20,6 +20,9 @@ namespace Unitunes
         
         void Application_EndRequest(object sender, System.EventArgs e)
         {
+
+
+
             // redireciona para login se nao tiver autorizado
             if (Response.StatusCode == 401)
             {
